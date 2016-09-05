@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspRegistration" table="wp_esp_registration" catalog="class21bd" optimistic-lock="version">
+        <id name="regId" type="java.lang.Integer">
+            <column name="REG_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="evtId" type="long">
+            <column name="EVT_ID" not-null="true" />
+        </property>
+        <property name="attId" type="long">
+            <column name="ATT_ID" not-null="true" />
+        </property>
+        <property name="txnId" type="int">
+            <column name="TXN_ID" not-null="true" />
+        </property>
+        <property name="tktId" type="int">
+            <column name="TKT_ID" not-null="true" />
+        </property>
+        <property name="stsId" type="string">
+            <column name="STS_ID" length="3" not-null="true" />
+        </property>
+        <property name="regDate" type="timestamp">
+            <column name="REG_date" length="19" not-null="true" />
+        </property>
+        <property name="regFinalPrice" type="big_decimal">
+            <column name="REG_final_price" precision="10" scale="3" not-null="true" />
+        </property>
+        <property name="regPaid" type="big_decimal">
+            <column name="REG_paid" precision="10" scale="3" not-null="true" />
+        </property>
+        <property name="regSession" type="string">
+            <column name="REG_session" length="45" not-null="true" />
+        </property>
+        <property name="regCode" type="string">
+            <column name="REG_code" length="45" />
+        </property>
+        <property name="regUrlLink" type="string">
+            <column name="REG_url_link" length="64" />
+        </property>
+        <property name="regCount" type="java.lang.Byte">
+            <column name="REG_count" />
+        </property>
+        <property name="regGroupSize" type="java.lang.Byte">
+            <column name="REG_group_size" />
+        </property>
+        <property name="regAttIsGoing" type="java.lang.Boolean">
+            <column name="REG_att_is_going" />
+        </property>
+        <property name="regDeleted" type="java.lang.Boolean">
+            <column name="REG_deleted" />
+        </property>
+    </class>
+</hibernate-mapping>

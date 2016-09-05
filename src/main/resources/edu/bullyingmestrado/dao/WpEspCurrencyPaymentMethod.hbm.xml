@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspCurrencyPaymentMethod" table="wp_esp_currency_payment_method" catalog="class21bd" optimistic-lock="version">
+        <id name="cpmId" type="java.lang.Integer">
+            <column name="CPM_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="curCode" type="string">
+            <column name="CUR_code" length="6" not-null="true" />
+        </property>
+        <property name="pmdId" type="int">
+            <column name="PMD_ID" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

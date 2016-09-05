@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpBpMessagesMessages" table="wp_bp_messages_messages" catalog="class21bd" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="threadId" type="long">
+            <column name="thread_id" not-null="true" />
+        </property>
+        <property name="senderId" type="long">
+            <column name="sender_id" not-null="true" />
+        </property>
+        <property name="subject" type="string">
+            <column name="subject" length="200" not-null="true" />
+        </property>
+        <property name="message" type="string">
+            <column name="message" not-null="true" />
+        </property>
+        <property name="dateSent" type="timestamp">
+            <column name="date_sent" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

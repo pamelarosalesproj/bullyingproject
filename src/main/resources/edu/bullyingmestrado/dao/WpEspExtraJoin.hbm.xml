@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspExtraJoin" table="wp_esp_extra_join" catalog="class21bd" optimistic-lock="version">
+        <id name="exjId" type="java.lang.Integer">
+            <column name="EXJ_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="exjFirstModelId" type="string">
+            <column name="EXJ_first_model_id" length="6" not-null="true" />
+        </property>
+        <property name="exjFirstModelName" type="string">
+            <column name="EXJ_first_model_name" length="20" not-null="true" />
+        </property>
+        <property name="exjSecondModelId" type="string">
+            <column name="EXJ_second_model_id" length="6" not-null="true" />
+        </property>
+        <property name="exjSecondModelName" type="string">
+            <column name="EXJ_second_model_name" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

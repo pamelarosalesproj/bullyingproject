@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspLog" table="wp_esp_log" catalog="class21bd" optimistic-lock="version">
+        <id name="logId" type="java.lang.Integer">
+            <column name="LOG_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="logTime" type="timestamp">
+            <column name="LOG_time" length="19" />
+        </property>
+        <property name="objId" type="string">
+            <column name="OBJ_ID" length="45" />
+        </property>
+        <property name="objType" type="string">
+            <column name="OBJ_type" length="45" />
+        </property>
+        <property name="logType" type="string">
+            <column name="LOG_type" length="45" />
+        </property>
+        <property name="logMessage" type="string">
+            <column name="LOG_message" length="65535" />
+        </property>
+        <property name="logWpUser" type="java.lang.Integer">
+            <column name="LOG_wp_user" />
+        </property>
+    </class>
+</hibernate-mapping>

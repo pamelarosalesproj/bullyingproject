@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspCountry" table="wp_esp_country" catalog="class21bd" optimistic-lock="version">
+        <id name="cntIso" type="string">
+            <column name="CNT_ISO" length="2" />
+            <generator class="assigned" />
+        </id>
+        <property name="cntIso3" type="string">
+            <column name="CNT_ISO3" length="3" not-null="true" />
+        </property>
+        <property name="rgnId" type="java.lang.Byte">
+            <column name="RGN_ID" />
+        </property>
+        <property name="cntName" type="string">
+            <column name="CNT_name" length="45" not-null="true" />
+        </property>
+        <property name="cntCurCode" type="string">
+            <column name="CNT_cur_code" length="6" />
+        </property>
+        <property name="cntCurSingle" type="string">
+            <column name="CNT_cur_single" length="45" />
+        </property>
+        <property name="cntCurPlural" type="string">
+            <column name="CNT_cur_plural" length="45" />
+        </property>
+        <property name="cntCurSign" type="string">
+            <column name="CNT_cur_sign" length="45" />
+        </property>
+        <property name="cntCurSignB4" type="java.lang.Boolean">
+            <column name="CNT_cur_sign_b4" />
+        </property>
+        <property name="cntCurDecPlc" type="byte">
+            <column name="CNT_cur_dec_plc" not-null="true" />
+        </property>
+        <property name="cntCurDecMrk" type="string">
+            <column name="CNT_cur_dec_mrk" length="1" not-null="true" />
+        </property>
+        <property name="cntCurThsnds" type="string">
+            <column name="CNT_cur_thsnds" length="1" not-null="true" />
+        </property>
+        <property name="cntTelCode" type="string">
+            <column name="CNT_tel_code" length="12" />
+        </property>
+        <property name="cntIsEu" type="java.lang.Boolean">
+            <column name="CNT_is_EU" />
+        </property>
+        <property name="cntActive" type="java.lang.Boolean">
+            <column name="CNT_active" />
+        </property>
+    </class>
+</hibernate-mapping>

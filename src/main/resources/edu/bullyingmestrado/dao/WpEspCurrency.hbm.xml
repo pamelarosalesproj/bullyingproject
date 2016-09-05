@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspCurrency" table="wp_esp_currency" catalog="class21bd" optimistic-lock="version">
+        <id name="curCode" type="string">
+            <column name="CUR_code" length="6" />
+            <generator class="assigned" />
+        </id>
+        <property name="curSingle" type="string">
+            <column name="CUR_single" length="45" />
+        </property>
+        <property name="curPlural" type="string">
+            <column name="CUR_plural" length="45" />
+        </property>
+        <property name="curSign" type="string">
+            <column name="CUR_sign" length="45" />
+        </property>
+        <property name="curDecPlc" type="string">
+            <column name="CUR_dec_plc" length="1" not-null="true" />
+        </property>
+        <property name="curActive" type="java.lang.Boolean">
+            <column name="CUR_active" />
+        </property>
+    </class>
+</hibernate-mapping>

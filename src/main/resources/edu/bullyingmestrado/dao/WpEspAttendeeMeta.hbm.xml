@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspAttendeeMeta" table="wp_esp_attendee_meta" catalog="class21bd" optimistic-lock="version">
+        <id name="attmId" type="java.lang.Integer">
+            <column name="ATTM_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="attId" type="long">
+            <column name="ATT_ID" not-null="true" />
+        </property>
+        <property name="attFname" type="string">
+            <column name="ATT_fname" length="45" not-null="true" />
+        </property>
+        <property name="attLname" type="string">
+            <column name="ATT_lname" length="45" not-null="true" />
+        </property>
+        <property name="attAddress" type="string">
+            <column name="ATT_address" />
+        </property>
+        <property name="attAddress2" type="string">
+            <column name="ATT_address2" />
+        </property>
+        <property name="attCity" type="string">
+            <column name="ATT_city" length="45" />
+        </property>
+        <property name="staId" type="java.lang.Integer">
+            <column name="STA_ID" />
+        </property>
+        <property name="cntIso" type="string">
+            <column name="CNT_ISO" length="45" />
+        </property>
+        <property name="attZip" type="string">
+            <column name="ATT_zip" length="12" />
+        </property>
+        <property name="attEmail" type="string">
+            <column name="ATT_email" not-null="true" />
+        </property>
+        <property name="attPhone" type="string">
+            <column name="ATT_phone" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

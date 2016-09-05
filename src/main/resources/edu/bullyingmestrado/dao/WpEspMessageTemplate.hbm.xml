@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspMessageTemplate" table="wp_esp_message_template" catalog="class21bd" optimistic-lock="version">
+        <id name="mtpId" type="java.lang.Integer">
+            <column name="MTP_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="grpId" type="int">
+            <column name="GRP_ID" not-null="true" />
+        </property>
+        <property name="mtpContext" type="string">
+            <column name="MTP_context" length="50" not-null="true" />
+        </property>
+        <property name="mtpTemplateField" type="string">
+            <column name="MTP_template_field" length="30" not-null="true" />
+        </property>
+        <property name="mtpContent" type="string">
+            <column name="MTP_content" length="65535" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

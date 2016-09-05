@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspRegistrationPayment" table="wp_esp_registration_payment" catalog="class21bd" optimistic-lock="version">
+        <id name="rpyId" type="java.lang.Integer">
+            <column name="RPY_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="regId" type="int">
+            <column name="REG_ID" not-null="true" />
+        </property>
+        <property name="payId" type="java.lang.Integer">
+            <column name="PAY_ID" />
+        </property>
+        <property name="rpyAmount" type="big_decimal">
+            <column name="RPY_amount" precision="10" scale="3" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

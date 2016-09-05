@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspQuestion" table="wp_esp_question" catalog="class21bd" optimistic-lock="version">
+        <id name="qstId" type="java.lang.Integer">
+            <column name="QST_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="qstDisplayText" type="string">
+            <column name="QST_display_text" length="65535" not-null="true" />
+        </property>
+        <property name="qstAdminLabel" type="string">
+            <column name="QST_admin_label" not-null="true" />
+        </property>
+        <property name="qstSystem" type="string">
+            <column name="QST_system" length="25" not-null="true" />
+        </property>
+        <property name="qstType" type="string">
+            <column name="QST_type" length="25" not-null="true" />
+        </property>
+        <property name="qstRequired" type="boolean">
+            <column name="QST_required" not-null="true" />
+        </property>
+        <property name="qstRequiredText" type="string">
+            <column name="QST_required_text" length="100" />
+        </property>
+        <property name="qstOrder" type="byte">
+            <column name="QST_order" not-null="true" />
+        </property>
+        <property name="qstAdminOnly" type="boolean">
+            <column name="QST_admin_only" not-null="true" />
+        </property>
+        <property name="qstMax" type="short">
+            <column name="QST_max" not-null="true" />
+        </property>
+        <property name="qstWpUser" type="java.lang.Long">
+            <column name="QST_wp_user" />
+        </property>
+        <property name="qstDeleted" type="byte">
+            <column name="QST_deleted" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

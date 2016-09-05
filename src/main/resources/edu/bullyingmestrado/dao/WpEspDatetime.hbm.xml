@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspDatetime" table="wp_esp_datetime" catalog="class21bd" optimistic-lock="version">
+        <id name="dttId" type="java.lang.Integer">
+            <column name="DTT_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="evtId" type="long">
+            <column name="EVT_ID" not-null="true" />
+        </property>
+        <property name="dttName" type="string">
+            <column name="DTT_name" not-null="true" />
+        </property>
+        <property name="dttDescription" type="string">
+            <column name="DTT_description" length="65535" not-null="true" />
+        </property>
+        <property name="dttEvtStart" type="timestamp">
+            <column name="DTT_EVT_start" length="19" not-null="true" />
+        </property>
+        <property name="dttEvtEnd" type="timestamp">
+            <column name="DTT_EVT_end" length="19" not-null="true" />
+        </property>
+        <property name="dttRegLimit" type="java.lang.Integer">
+            <column name="DTT_reg_limit" />
+        </property>
+        <property name="dttSold" type="java.lang.Integer">
+            <column name="DTT_sold" />
+        </property>
+        <property name="dttIsPrimary" type="boolean">
+            <column name="DTT_is_primary" not-null="true" />
+        </property>
+        <property name="dttOrder" type="java.lang.Integer">
+            <column name="DTT_order" />
+        </property>
+        <property name="dttParent" type="java.lang.Integer">
+            <column name="DTT_parent" />
+        </property>
+        <property name="dttDeleted" type="boolean">
+            <column name="DTT_deleted" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

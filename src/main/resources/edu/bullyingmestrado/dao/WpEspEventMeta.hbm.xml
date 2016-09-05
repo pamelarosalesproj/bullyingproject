@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspEventMeta" table="wp_esp_event_meta" catalog="class21bd" optimistic-lock="version">
+        <id name="evtmId" type="java.lang.Integer">
+            <column name="EVTM_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="evtId" type="long">
+            <column name="EVT_ID" not-null="true" />
+        </property>
+        <property name="evtDisplayDesc" type="boolean">
+            <column name="EVT_display_desc" not-null="true" />
+        </property>
+        <property name="evtDisplayTicketSelector" type="boolean">
+            <column name="EVT_display_ticket_selector" not-null="true" />
+        </property>
+        <property name="evtVisibleOn" type="timestamp">
+            <column name="EVT_visible_on" length="19" not-null="true" />
+        </property>
+        <property name="evtDefaultRegistrationStatus" type="string">
+            <column name="EVT_default_registration_status" length="3" />
+        </property>
+        <property name="evtPhone" type="string">
+            <column name="EVT_phone" length="45" />
+        </property>
+        <property name="evtAdditionalLimit" type="java.lang.Byte">
+            <column name="EVT_additional_limit" />
+        </property>
+        <property name="evtMemberOnly" type="boolean">
+            <column name="EVT_member_only" not-null="true" />
+        </property>
+        <property name="evtAllowOverflow" type="boolean">
+            <column name="EVT_allow_overflow" not-null="true" />
+        </property>
+        <property name="evtTimezoneString" type="string">
+            <column name="EVT_timezone_string" length="45" />
+        </property>
+        <property name="evtExternalUrl" type="string">
+            <column name="EVT_external_URL" length="200" />
+        </property>
+        <property name="evtDonations" type="java.lang.Boolean">
+            <column name="EVT_donations" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspTransaction" table="wp_esp_transaction" catalog="class21bd" optimistic-lock="version">
+        <id name="txnId" type="java.lang.Integer">
+            <column name="TXN_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="txnTimestamp" type="timestamp">
+            <column name="TXN_timestamp" length="19" not-null="true" />
+        </property>
+        <property name="txnTotal" type="big_decimal">
+            <column name="TXN_total" precision="10" scale="3" />
+        </property>
+        <property name="txnPaid" type="big_decimal">
+            <column name="TXN_paid" precision="10" scale="3" not-null="true" />
+        </property>
+        <property name="stsId" type="string">
+            <column name="STS_ID" length="3" not-null="true" />
+        </property>
+        <property name="txnSessionData" type="string">
+            <column name="TXN_session_data" length="65535" />
+        </property>
+        <property name="txnHashSalt" type="string">
+            <column name="TXN_hash_salt" length="250" />
+        </property>
+        <property name="pmdId" type="java.lang.Integer">
+            <column name="PMD_ID" />
+        </property>
+        <property name="txnRegSteps" type="string">
+            <column name="TXN_reg_steps" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

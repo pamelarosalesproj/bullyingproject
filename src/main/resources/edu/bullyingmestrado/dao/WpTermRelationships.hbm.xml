@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpTermRelationships" table="wp_term_relationships" catalog="class21bd" optimistic-lock="version">
+        <composite-id name="id" class="edu.bullyingmestrado.dao.WpTermRelationshipsId">
+            <key-property name="objectId" type="long">
+                <column name="object_id" />
+            </key-property>
+            <key-property name="termTaxonomyId" type="long">
+                <column name="term_taxonomy_id" />
+            </key-property>
+        </composite-id>
+        <property name="termOrder" type="int">
+            <column name="term_order" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

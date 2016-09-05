@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspMessageTemplateGroup" table="wp_esp_message_template_group" catalog="class21bd" optimistic-lock="version">
+        <id name="grpId" type="java.lang.Integer">
+            <column name="GRP_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="mtpUserId" type="int">
+            <column name="MTP_user_id" not-null="true" />
+        </property>
+        <property name="mtpName" type="string">
+            <column name="MTP_name" length="245" not-null="true" />
+        </property>
+        <property name="mtpDescription" type="string">
+            <column name="MTP_description" length="245" not-null="true" />
+        </property>
+        <property name="mtpMessenger" type="string">
+            <column name="MTP_messenger" length="30" not-null="true" />
+        </property>
+        <property name="mtpMessageType" type="string">
+            <column name="MTP_message_type" length="50" not-null="true" />
+        </property>
+        <property name="mtpIsGlobal" type="boolean">
+            <column name="MTP_is_global" not-null="true" />
+        </property>
+        <property name="mtpIsOverride" type="boolean">
+            <column name="MTP_is_override" not-null="true" />
+        </property>
+        <property name="mtpDeleted" type="boolean">
+            <column name="MTP_deleted" not-null="true" />
+        </property>
+        <property name="mtpIsActive" type="boolean">
+            <column name="MTP_is_active" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

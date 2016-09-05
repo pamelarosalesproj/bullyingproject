@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspPayment" table="wp_esp_payment" catalog="class21bd" optimistic-lock="version">
+        <id name="payId" type="java.lang.Integer">
+            <column name="PAY_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="txnId" type="java.lang.Integer">
+            <column name="TXN_ID" />
+        </property>
+        <property name="stsId" type="string">
+            <column name="STS_ID" length="3" />
+        </property>
+        <property name="payTimestamp" type="timestamp">
+            <column name="PAY_timestamp" length="19" not-null="true" />
+        </property>
+        <property name="paySource" type="string">
+            <column name="PAY_source" length="45" />
+        </property>
+        <property name="payAmount" type="big_decimal">
+            <column name="PAY_amount" precision="10" scale="3" />
+        </property>
+        <property name="pmdId" type="java.lang.Integer">
+            <column name="PMD_ID" />
+        </property>
+        <property name="payGatewayResponse" type="string">
+            <column name="PAY_gateway_response" length="65535" />
+        </property>
+        <property name="payTxnIdChqNmbr" type="string">
+            <column name="PAY_txn_id_chq_nmbr" length="100" />
+        </property>
+        <property name="payPoNumber" type="string">
+            <column name="PAY_po_number" length="100" />
+        </property>
+        <property name="payExtraAccntng" type="string">
+            <column name="PAY_extra_accntng" length="100" />
+        </property>
+        <property name="payDetails" type="string">
+            <column name="PAY_details" length="65535" />
+        </property>
+        <property name="payRedirectUrl" type="string">
+            <column name="PAY_redirect_url" length="300" />
+        </property>
+        <property name="payRedirectArgs" type="string">
+            <column name="PAY_redirect_args" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

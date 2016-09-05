@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspTicketTemplate" table="wp_esp_ticket_template" catalog="class21bd" optimistic-lock="version">
+        <id name="ttmId" type="java.lang.Integer">
+            <column name="TTM_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="ttmName" type="string">
+            <column name="TTM_name" length="45" not-null="true" />
+        </property>
+        <property name="ttmDescription" type="string">
+            <column name="TTM_description" length="65535" />
+        </property>
+        <property name="ttmFile" type="string">
+            <column name="TTM_file" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

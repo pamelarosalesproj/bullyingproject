@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspTicketPrice" table="wp_esp_ticket_price" catalog="class21bd" optimistic-lock="version">
+        <id name="tkpId" type="java.lang.Integer">
+            <column name="TKP_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="tktId" type="int">
+            <column name="TKT_ID" not-null="true" />
+        </property>
+        <property name="prcId" type="int">
+            <column name="PRC_ID" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

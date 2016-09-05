@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspQuestionOption" table="wp_esp_question_option" catalog="class21bd" optimistic-lock="version">
+        <id name="qsoId" type="java.lang.Integer">
+            <column name="QSO_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="qsoValue" type="string">
+            <column name="QSO_value" not-null="true" />
+        </property>
+        <property name="qsoDesc" type="string">
+            <column name="QSO_desc" length="65535" not-null="true" />
+        </property>
+        <property name="qstId" type="int">
+            <column name="QST_ID" not-null="true" />
+        </property>
+        <property name="qsoOrder" type="int">
+            <column name="QSO_order" not-null="true" />
+        </property>
+        <property name="qsoSystem" type="string">
+            <column name="QSO_system" length="25" />
+        </property>
+        <property name="qsoDeleted" type="boolean">
+            <column name="QSO_deleted" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

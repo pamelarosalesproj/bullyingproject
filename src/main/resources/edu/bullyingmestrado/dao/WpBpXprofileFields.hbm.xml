@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpBpXprofileFields" table="wp_bp_xprofile_fields" catalog="class21bd" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="groupId" type="long">
+            <column name="group_id" not-null="true" />
+        </property>
+        <property name="parentId" type="long">
+            <column name="parent_id" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="150" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="150" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true" />
+        </property>
+        <property name="isRequired" type="boolean">
+            <column name="is_required" not-null="true" />
+        </property>
+        <property name="isDefaultOption" type="boolean">
+            <column name="is_default_option" not-null="true" />
+        </property>
+        <property name="fieldOrder" type="long">
+            <column name="field_order" not-null="true" />
+        </property>
+        <property name="optionOrder" type="long">
+            <column name="option_order" not-null="true" />
+        </property>
+        <property name="orderBy" type="string">
+            <column name="order_by" length="15" not-null="true" />
+        </property>
+        <property name="canDelete" type="boolean">
+            <column name="can_delete" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,101 @@
+// Block definition (there may be more than one block per file)
+FUNCTION_BLOCK tipper
+
+// Define input variables 
+//Then input and output variable/s are defined (variable type is only REAL, integer is not implemented yet)
+VAR_INPUT
+    
+	verbal : REAL;
+	victim : REAL;
+	teasing : REAL;
+	
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    Severity : REAL;
+END_VAR
+
+
+//How each input variable is fuzzified is defined in FUZZIFY block. In each block 
+//we define one or more TERMs (also called LinguisticTerms). Each term is composed by a name and a membership function.
+
+
+
+
+
+FUZZIFY verbal
+    TERM Low := trape -0.3427 -0.1021 0.08 0.11;
+	TERM Medium := trian 0.08 0.18 0.28;
+	TERM High := trape 0.25 0.65 0.71 0.951;
+END_FUZZIFY
+
+FUZZIFY victim
+    TERM Low := trape -1.34 -0.723 -0.56 0.5;
+	TERM Medium := trian -0.55 0.41 1.41;
+	TERM High := trape 0.5 1.65 1.95 2.71;
+END_FUZZIFY
+
+FUZZIFY teasing
+    TERM No := trape -4.59 -2.91 -0.5 0;
+	TERM Yes := trape 0 0.5 2.76 4.44;
+END_FUZZIFY
+
+
+FUZZIFY Severity
+  TERM Low := trian -0.4 0 0.4;
+  TERM Medium := trian 0.3 0.5 0.7;
+  TERM High := trian 0.6 1 1.4;
+END_FUZZIFY
+
+
+
+
+// Defzzzify output variable 'tip'
+//Output variables are defuzzified to get a 'real' output number, 
+//this is defined in DEFUZZIFY block. Like FUZZIFY block, 
+//linguistic terms (or TERMs) are defined:
+DEFUZZIFY Severity
+    TERM Low := (0,0) (2.5,1) (2.5,1)(13,0);
+    TERM Medium := (11,0) (14,1) (18,0);
+    TERM High := (15,0) (20,1) (25,1) (30,0);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : RM;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK No1
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+
+RULE 37 : IF verbal IS Low AND victim IS Low AND teasing IS No THEN Severity IS Low;             
+RULE 38 : IF verbal IS Low AND victim IS Low AND teasing IS Yes THEN Severity IS Low;            
+RULE 39 : IF verbal IS Low AND victim IS Medium AND teasing IS No THEN Severity IS Low;          
+RULE 40 : IF verbal IS Low AND victim IS Medium AND teasing IS Yes THEN Severity IS Low;         
+RULE 41 : IF verbal IS Low AND victim IS High AND teasing IS No THEN Severity IS Low;            
+RULE 42 : IF verbal IS Low AND victim IS High AND teasing IS Yes THEN Severity IS Low;           
+RULE 43 : IF verbal IS Medium AND victim IS Low AND teasing IS No THEN Severity IS Low;          
+RULE 44 : IF verbal IS Medium AND victim IS Low AND teasing IS Yes THEN Severity IS Low;         
+RULE 45 : IF verbal IS Medium AND victim IS Medium AND teasing IS No THEN Severity IS Medium;    
+RULE 46 : IF verbal IS Medium AND victim IS Medium AND teasing IS Yes THEN Severity IS Low;      
+RULE 47 : IF verbal IS Medium AND victim IS High AND teasing IS No THEN Severity IS Medium;      
+RULE 48 : IF verbal IS Medium AND victim IS High AND teasing IS Yes THEN Severity IS Low;        
+RULE 49 : IF verbal IS High AND victim IS Low AND teasing IS No THEN Severity IS Medium;         
+RULE 50 : IF verbal IS High AND victim IS Low AND teasing IS Yes THEN Severity IS Low;           
+RULE 51 : IF verbal IS High AND victim IS Medium AND teasing IS No THEN Severity IS Medium;      
+RULE 52 : IF verbal IS High AND victim IS Medium AND teasing IS Yes THEN Severity IS Low;        
+RULE 53 : IF verbal IS High AND victim IS High AND teasing IS No THEN Severity IS High;          
+RULE 54 : IF verbal IS High AND victim IS High AND teasing IS Yes THEN Severity IS Medium;       
+
+
+END_RULEBLOCK
+
+
+END_FUNCTION_BLOCK

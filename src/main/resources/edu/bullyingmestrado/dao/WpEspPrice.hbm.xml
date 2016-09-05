@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspPrice" table="wp_esp_price" catalog="class21bd" optimistic-lock="version">
+        <id name="prcId" type="java.lang.Integer">
+            <column name="PRC_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="prtId" type="byte">
+            <column name="PRT_ID" not-null="true" />
+        </property>
+        <property name="prcAmount" type="big_decimal">
+            <column name="PRC_amount" precision="10" scale="3" not-null="true" />
+        </property>
+        <property name="prcName" type="string">
+            <column name="PRC_name" length="245" not-null="true" />
+        </property>
+        <property name="prcDesc" type="string">
+            <column name="PRC_desc" length="65535" />
+        </property>
+        <property name="prcIsDefault" type="boolean">
+            <column name="PRC_is_default" not-null="true" />
+        </property>
+        <property name="prcOverrides" type="java.lang.Integer">
+            <column name="PRC_overrides" />
+        </property>
+        <property name="prcDeleted" type="boolean">
+            <column name="PRC_deleted" not-null="true" />
+        </property>
+        <property name="prcOrder" type="byte">
+            <column name="PRC_order" not-null="true" />
+        </property>
+        <property name="prcWpUser" type="java.lang.Long">
+            <column name="PRC_wp_user" />
+        </property>
+        <property name="prcParent" type="java.lang.Integer">
+            <column name="PRC_parent" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspTicket" table="wp_esp_ticket" catalog="class21bd" optimistic-lock="version">
+        <id name="tktId" type="java.lang.Integer">
+            <column name="TKT_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="ttmId" type="int">
+            <column name="TTM_ID" not-null="true" />
+        </property>
+        <property name="tktName" type="string">
+            <column name="TKT_name" length="245" not-null="true" />
+        </property>
+        <property name="tktDescription" type="string">
+            <column name="TKT_description" length="65535" not-null="true" />
+        </property>
+        <property name="tktQty" type="java.lang.Integer">
+            <column name="TKT_qty" />
+        </property>
+        <property name="tktSold" type="int">
+            <column name="TKT_sold" not-null="true" />
+        </property>
+        <property name="tktUses" type="byte">
+            <column name="TKT_uses" not-null="true" />
+        </property>
+        <property name="tktRequired" type="byte">
+            <column name="TKT_required" not-null="true" />
+        </property>
+        <property name="tktMin" type="byte">
+            <column name="TKT_min" not-null="true" />
+        </property>
+        <property name="tktMax" type="byte">
+            <column name="TKT_max" not-null="true" />
+        </property>
+        <property name="tktPrice" type="big_decimal">
+            <column name="TKT_price" precision="10" scale="3" not-null="true" />
+        </property>
+        <property name="tktStartDate" type="timestamp">
+            <column name="TKT_start_date" length="19" not-null="true" />
+        </property>
+        <property name="tktEndDate" type="timestamp">
+            <column name="TKT_end_date" length="19" not-null="true" />
+        </property>
+        <property name="tktTaxable" type="boolean">
+            <column name="TKT_taxable" not-null="true" />
+        </property>
+        <property name="tktOrder" type="byte">
+            <column name="TKT_order" not-null="true" />
+        </property>
+        <property name="tktRow" type="byte">
+            <column name="TKT_row" not-null="true" />
+        </property>
+        <property name="tktIsDefault" type="boolean">
+            <column name="TKT_is_default" not-null="true" />
+        </property>
+        <property name="tktWpUser" type="java.lang.Long">
+            <column name="TKT_wp_user" />
+        </property>
+        <property name="tktParent" type="java.lang.Integer">
+            <column name="TKT_parent" />
+        </property>
+        <property name="tktDeleted" type="boolean">
+            <column name="TKT_deleted" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

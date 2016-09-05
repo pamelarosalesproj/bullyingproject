@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspPriceType" table="wp_esp_price_type" catalog="class21bd" optimistic-lock="version">
+        <id name="prtId" type="java.lang.Byte">
+            <column name="PRT_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="prtName" type="string">
+            <column name="PRT_name" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="pbtId" type="byte">
+            <column name="PBT_ID" not-null="true" />
+        </property>
+        <property name="prtIsPercent" type="boolean">
+            <column name="PRT_is_percent" not-null="true" />
+        </property>
+        <property name="prtOrder" type="java.lang.Byte">
+            <column name="PRT_order" />
+        </property>
+        <property name="prtWpUser" type="java.lang.Long">
+            <column name="PRT_wp_user" />
+        </property>
+        <property name="prtDeleted" type="boolean">
+            <column name="PRT_deleted" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

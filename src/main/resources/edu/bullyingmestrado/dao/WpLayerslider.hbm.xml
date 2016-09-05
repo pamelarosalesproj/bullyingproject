@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpLayerslider" table="wp_layerslider" catalog="class21bd" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="author" type="int">
+            <column name="author" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="100" not-null="true" />
+        </property>
+        <property name="slug" type="string">
+            <column name="slug" length="100" not-null="true" />
+        </property>
+        <property name="data" type="string">
+            <column name="data" length="16777215" not-null="true" />
+        </property>
+        <property name="dateC" type="int">
+            <column name="date_c" not-null="true" />
+        </property>
+        <property name="dateM" type="int">
+            <column name="date_m" not-null="true" />
+        </property>
+        <property name="flagHidden" type="boolean">
+            <column name="flag_hidden" not-null="true" />
+        </property>
+        <property name="flagDeleted" type="boolean">
+            <column name="flag_deleted" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspExtraMeta" table="wp_esp_extra_meta" catalog="class21bd" optimistic-lock="version">
+        <id name="exmId" type="java.lang.Integer">
+            <column name="EXM_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="objId" type="java.lang.Integer">
+            <column name="OBJ_ID" />
+        </property>
+        <property name="exmType" type="string">
+            <column name="EXM_type" length="45" />
+        </property>
+        <property name="exmKey" type="string">
+            <column name="EXM_key" length="45" />
+        </property>
+        <property name="exmValue" type="string">
+            <column name="EXM_value" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

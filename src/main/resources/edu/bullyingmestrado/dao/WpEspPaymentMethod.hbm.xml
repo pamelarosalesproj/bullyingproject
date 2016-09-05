@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspPaymentMethod" table="wp_esp_payment_method" catalog="class21bd" optimistic-lock="version">
+        <id name="pmdId" type="java.lang.Integer">
+            <column name="PMD_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="pmdType" type="string">
+            <column name="PMD_type" length="124" />
+        </property>
+        <property name="pmdName" type="string">
+            <column name="PMD_name" />
+        </property>
+        <property name="pmdDesc" type="string">
+            <column name="PMD_desc" length="65535" />
+        </property>
+        <property name="pmdAdminName" type="string">
+            <column name="PMD_admin_name" />
+        </property>
+        <property name="pmdAdminDesc" type="string">
+            <column name="PMD_admin_desc" length="65535" />
+        </property>
+        <property name="pmdSlug" type="string">
+            <column name="PMD_slug" length="124" unique="true" />
+        </property>
+        <property name="pmdOrder" type="java.lang.Integer">
+            <column name="PMD_order" />
+        </property>
+        <property name="pmdDebugMode" type="boolean">
+            <column name="PMD_debug_mode" not-null="true" />
+        </property>
+        <property name="pmdWpUser" type="int">
+            <column name="PMD_wp_user" not-null="true" />
+        </property>
+        <property name="pmdOpenByDefault" type="boolean">
+            <column name="PMD_open_by_default" not-null="true" />
+        </property>
+        <property name="pmdButtonUrl" type="string">
+            <column name="PMD_button_url" length="1012" />
+        </property>
+        <property name="pmdScope" type="string">
+            <column name="PMD_scope" />
+        </property>
+    </class>
+</hibernate-mapping>

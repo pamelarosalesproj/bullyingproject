@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspLineItem" table="wp_esp_line_item" catalog="class21bd" optimistic-lock="version">
+        <id name="linId" type="java.lang.Integer">
+            <column name="LIN_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="linCode" type="string">
+            <column name="LIN_code" length="245" not-null="true" />
+        </property>
+        <property name="txnId" type="java.lang.Integer">
+            <column name="TXN_ID" />
+        </property>
+        <property name="linName" type="string">
+            <column name="LIN_name" length="245" not-null="true" />
+        </property>
+        <property name="linDesc" type="string">
+            <column name="LIN_desc" length="65535" />
+        </property>
+        <property name="linUnitPrice" type="big_decimal">
+            <column name="LIN_unit_price" precision="10" scale="3" />
+        </property>
+        <property name="linPercent" type="big_decimal">
+            <column name="LIN_percent" precision="10" scale="3" />
+        </property>
+        <property name="linIsTaxable" type="java.lang.Boolean">
+            <column name="LIN_is_taxable" />
+        </property>
+        <property name="linOrder" type="java.lang.Integer">
+            <column name="LIN_order" />
+        </property>
+        <property name="linParent" type="java.lang.Integer">
+            <column name="LIN_parent" />
+        </property>
+        <property name="linType" type="string">
+            <column name="LIN_type" length="25" not-null="true" />
+        </property>
+        <property name="linTotal" type="big_decimal">
+            <column name="LIN_total" precision="10" scale="3" />
+        </property>
+        <property name="linQuantity" type="java.lang.Integer">
+            <column name="LIN_quantity" />
+        </property>
+        <property name="objId" type="java.lang.Integer">
+            <column name="OBJ_ID" />
+        </property>
+        <property name="objType" type="string">
+            <column name="OBJ_type" length="45" />
+        </property>
+        <property name="linTimestamp" type="timestamp">
+            <column name="LIN_timestamp" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

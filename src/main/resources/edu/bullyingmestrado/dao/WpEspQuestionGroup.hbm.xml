@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspQuestionGroup" table="wp_esp_question_group" catalog="class21bd" optimistic-lock="version">
+        <id name="qsgId" type="java.lang.Integer">
+            <column name="QSG_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="qsgName" type="string">
+            <column name="QSG_name" not-null="true" />
+        </property>
+        <property name="qsgIdentifier" type="string">
+            <column name="QSG_identifier" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="qsgDesc" type="string">
+            <column name="QSG_desc" length="65535" />
+        </property>
+        <property name="qsgOrder" type="byte">
+            <column name="QSG_order" not-null="true" />
+        </property>
+        <property name="qsgShowGroupName" type="boolean">
+            <column name="QSG_show_group_name" not-null="true" />
+        </property>
+        <property name="qsgShowGroupDesc" type="boolean">
+            <column name="QSG_show_group_desc" not-null="true" />
+        </property>
+        <property name="qsgSystem" type="java.lang.Byte">
+            <column name="QSG_system" />
+        </property>
+        <property name="qsgDeleted" type="boolean">
+            <column name="QSG_deleted" not-null="true" />
+        </property>
+        <property name="qsgWpUser" type="java.lang.Long">
+            <column name="QSG_wp_user" />
+        </property>
+    </class>
+</hibernate-mapping>

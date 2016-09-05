@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/09/2016 05:05:01 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.bullyingmestrado.dao.WpEspVenueMeta" table="wp_esp_venue_meta" catalog="class21bd" optimistic-lock="version">
+        <id name="vnumId" type="java.lang.Integer">
+            <column name="VNUM_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="vnuId" type="long">
+            <column name="VNU_ID" not-null="true" />
+        </property>
+        <property name="vnuAddress" type="string">
+            <column name="VNU_address" />
+        </property>
+        <property name="vnuAddress2" type="string">
+            <column name="VNU_address2" />
+        </property>
+        <property name="vnuCity" type="string">
+            <column name="VNU_city" length="100" />
+        </property>
+        <property name="staId" type="java.lang.Integer">
+            <column name="STA_ID" />
+        </property>
+        <property name="cntIso" type="string">
+            <column name="CNT_ISO" length="2" />
+        </property>
+        <property name="vnuZip" type="string">
+            <column name="VNU_zip" length="45" />
+        </property>
+        <property name="vnuPhone" type="string">
+            <column name="VNU_phone" length="45" />
+        </property>
+        <property name="vnuCapacity" type="java.lang.Integer">
+            <column name="VNU_capacity" />
+        </property>
+        <property name="vnuUrl" type="string">
+            <column name="VNU_url" />
+        </property>
+        <property name="vnuVirtualPhone" type="string">
+            <column name="VNU_virtual_phone" length="45" />
+        </property>
+        <property name="vnuVirtualUrl" type="string">
+            <column name="VNU_virtual_url" />
+        </property>
+        <property name="vnuEnableForGmap" type="java.lang.Boolean">
+            <column name="VNU_enable_for_gmap" />
+        </property>
+        <property name="vnuGoogleMapLink" type="string">
+            <column name="VNU_google_map_link" />
+        </property>
+    </class>
+</hibernate-mapping>
