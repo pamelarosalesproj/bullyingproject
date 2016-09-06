@@ -50,7 +50,7 @@ public class Enrichment {
 			/*BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));*/
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					Enrichment.class.getResourceAsStream("model/test.txt")));
+					Enrichment.class.getResourceAsStream("/tweets/test.txt")));
 			
 			while ((line = br.readLine()) != null) {
 				boolean containKeyword = false;

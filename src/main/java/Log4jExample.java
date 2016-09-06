@@ -19,22 +19,13 @@ public class Log4jExample {
         // Set up a simple configuration that logs on the console.
         System.out.println("hola..");
         logger.trace("ENTRAR");
-        Bar bar = new Bar();
-        if (!bar.doIt()) {
+       
+        if (true) {
             logger.error("NO SE HIZO NADA");
         }
         logger.trace("SALIR");
         
-        
-        
-        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyARRmwp65-nVtfJeUACJ79G1YLpLyxJK4M");
-        GeocodingResult[] results;
-        try {
-            results = GeocodingApi.geocode(context,  "1600 Amphitheatre Parkway Mountain View, CA 94043").await();
-            System.out.println(results[0].formattedAddress);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+       
         
     }
 }
