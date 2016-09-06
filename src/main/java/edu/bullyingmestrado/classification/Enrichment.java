@@ -35,6 +35,13 @@ June 2012
 
 */
 
+/**
+ *
+ * @author Jun-Ming Xu
+ * Modified by Pamela Rosales
+ */
+
+import edu.bullyingmestrado.commons.Constants;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -45,12 +52,10 @@ public class Enrichment {
 			"bullied", "bully", "bullyed", "bullying", "bullyer", "bulling"};
 
 	public static void main(String[] args) {
-		String line = null;
+		String line;
 		try {
-			/*BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));*/
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					Enrichment.class.getResourceAsStream("/tweets/test.txt")));
+					Enrichment.class.getResourceAsStream(Constants.PATH_TWEETS_INI)));
 			
 			while ((line = br.readLine()) != null) {
 				boolean containKeyword = false;
@@ -60,8 +65,8 @@ public class Enrichment {
 						containKeyword = true;
 						break;
 					}
-				if (containKeyword == true && lowerCase.contains("bull")
-						&& !line.contains("RT")) {
+				if (containKeyword == true && lowerCase.contains(Constants.TWEET_BULL)
+						&& !line.contains(Constants.TWEET_RT)) {
 					System.out.println(line);
 				}
 			}

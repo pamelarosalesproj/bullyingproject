@@ -6,6 +6,11 @@ Contact: Jun-Ming Xu (xujm@cs.wisc.edu), Xiaojin Zhu (jerryzhu@cs.wisc.edu)
 June 2012
 
 */
+/**
+ *
+ * @author Jun-Ming Xu
+ * Modified by Pamela Rosales
+ */
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

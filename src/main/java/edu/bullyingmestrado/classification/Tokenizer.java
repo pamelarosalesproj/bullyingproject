@@ -6,7 +6,11 @@ Contact: Jun-Ming Xu (xujm@cs.wisc.edu), Xiaojin Zhu (jerryzhu@cs.wisc.edu)
 June 2012
 
 */
-
+/**
+ *
+ * @author Jun-Ming Xu
+ * Modified by Pamela Rosales
+ */
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,32 +34,34 @@ public class Tokenizer {
 		}
 		// deal with negation
 		text = text.replaceAll("\\'", "");
-        text = text.replaceAll("\\!\\!+", "!!");
-        text = text.replaceAll("\\?\\?+", "??");
-        text = text.replaceAll("\\bno\\s+", "no_");
-        text = text.replaceAll("\\bnot\\s+", "not_");
-        text = text.replaceAll("\\bdoesnt\\s+", "doesnt_");
-        text = text.replaceAll("\\bdont\\s+", "dont_");
-        text = text.replaceAll("\\baint\\s+", "aint_");
+                text = text.replaceAll("\\!\\!+", "!!");
+                text = text.replaceAll("\\?\\?+", "??");
+                text = text.replaceAll("\\bno\\s+", "no_");
+                text = text.replaceAll("\\bnot\\s+", "not_");
+                text = text.replaceAll("\\bdoesnt\\s+", "doesnt_");
+                text = text.replaceAll("\\bdont\\s+", "dont_");
+                text = text.replaceAll("\\baint\\s+", "aint_");
         
-        // tokenizer
-        Pattern p = null;
-        
-        if (emoticons)
-        	p = Pattern.compile("([\\@\\#]?\\w[\\w'_]*)|([:;=x][-o^]?[)(/\\\\dp])|([/\\\\)(dp][-o^]?[:;=x])|([!?]+)");
-        else
-        	p = Pattern.compile("[\\@\\#]?\\w[\\w'_]*");
-        Matcher matcher = p.matcher(text);
-        ArrayList<String> tokens = new ArrayList<String>();
-        String matchText = null;
-        while(matcher == null || matcher.find()){
-        	matchText = matcher.group();
-        	if (matchText.length() == 0)
-        		break;
-        	tokens.add(matchText);
+                // tokenizer
+                Pattern p = null;
+
+                if (emoticons)
+                        p = Pattern.compile("([\\@\\#]?\\w[\\w'_]*)|([:;=x][-o^]?[)(/\\\\dp])|([/\\\\)(dp][-o^]?[:;=x])|([!?]+)");
+                else
+                        p = Pattern.compile("[\\@\\#]?\\w[\\w'_]*");
+
+                Matcher matcher = p.matcher(text);
+                ArrayList<String> tokens = new ArrayList<String>();
+                String matchText = null;
+                    while(matcher == null || matcher.find()){
+                            matchText = matcher.group();
+                            if (matchText.length() == 0)
+                                    break;
+                            tokens.add(matchText);
+                    }
+                return tokens;
+	
         }
-		return tokens;
-	}
 
 
 	public boolean isToLowerCare() {
