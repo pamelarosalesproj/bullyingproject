@@ -33,6 +33,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import edu.bullyingmestrado.commons.Constants;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 /**
  *
@@ -142,7 +143,7 @@ public class Classification implements Comparable<Classification>{
 		return true;
 	}
 
-	public boolean loadModel() throws Exception {
+	public boolean loadModel() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				Classification.class.getResourceAsStream(this.pathModel)));
 		String line = br.readLine();  // ignore first line
@@ -223,7 +224,6 @@ public class Classification implements Comparable<Classification>{
 
 	public void classify(Integer[] index, double[] value) {
 		String rptaClassificador;
-		
                 //@pamela --> Evaluate if the classifier is binary
 		if (num_classes == 2) {
 			double margin = 0.0;
@@ -233,6 +233,7 @@ public class Classification implements Comparable<Classification>{
 			rptaClassificador = margin > 0 ? class_labels[0] : class_labels[1];
                         this.value = margin;
                         this.classResult = rptaClassificador  + Constants.UNDERLINE + this.classifierName;
+                        System.out.println("en classify class result:"  + this.classResult);
                         return;
 		}
 		
@@ -262,6 +263,8 @@ public class Classification implements Comparable<Classification>{
                 
                 this.classResult = class_labels[idx];
                 this.value = max_margin;
+                                        System.out.println("en classify class result:"  + this.classResult);
+
         }
         
         

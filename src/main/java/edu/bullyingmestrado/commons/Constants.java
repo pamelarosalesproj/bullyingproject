@@ -74,7 +74,7 @@ public final class Constants {
            */
           public static final String PATH_TWEETS_INI = "/tweets/test.txt";
           public static final String PATH_MODELS = "/model/";
-          public static final String PATH_FCL = "/fcl/";
+          public static final String PATH_FCL = "fcl/";
           public static final String PATH_VOCAB = "/model/vocab";
           
           /**

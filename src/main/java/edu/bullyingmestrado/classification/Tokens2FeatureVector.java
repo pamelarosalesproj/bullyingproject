@@ -50,7 +50,7 @@ public class Tokens2FeatureVector {
 	}
 	
 	public void covertFeatureVector(ArrayList<String> tokens){
-		fv = new FeatureVector(vocab.size());
+		this.fv = new FeatureVector(vocab.size());
 		for (String t : tokens){
 			Integer idx = vocab.get(t);
 			if (idx != null)
@@ -61,11 +61,13 @@ public class Tokens2FeatureVector {
 			if (idx != null)
 				fv.increase(idx);
 		}
-		fv.normalize();
+		this.fv.normalize();
+                System.out.println("imprime vector normalizado");
 	   System.out.println(fv.toString());	
 	}
 	
 	public Integer[] getIndexSet(){
+            System.out.println("fv es: "+ fv);
 		return fv.getIndexSet();
 	}
 	

@@ -92,7 +92,7 @@ public class Tweet {
            this.valueSeverity = fuzzy.getFuzzy(
                                     this.mapClassifiers.get(Constants.CLA_AUTHOR_ROLE).getClassResult(), 
                                     this.mapClassifiers.get(Constants.CLA_FORM).getClassResult(),
-                                    this.mapClassifiers.get(Constants.CLA_TEASING).getClassResult(),
+                                    this.mapClassifiers.get(Constants.CLA_TEASING).getClassifierName(),
                                     this.mapClassifiers.get(Constants.CLA_AUTHOR_ROLE).getValue(), 
                                     this.mapClassifiers.get(Constants.CLA_FORM).getValue(),
                                     this.mapClassifiers.get(Constants.CLA_TEASING).getValue()

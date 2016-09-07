@@ -20,7 +20,8 @@ public class Fuzzification {
      
     public double getFuzzy(String varname1, String varname2, String varname3, 
                             double value1, double value2, double value3){
-    	String fileName = Constants.PATH_FCL +varname1+ Constants.UNDERLINE + varname2+ Constants.EXT_FCL;
+    	String fileName = "src/main/resources/fcl/" +varname1+ Constants.UNDERLINE + varname2+ Constants.EXT_FCL;
+        System.out.println("nome arquivo fcl " + fileName);
         FIS fis = FIS.load(fileName,true);
 
         // Cargar el archivo FCL
@@ -34,9 +35,9 @@ public class Fuzzification {
      // Entradas del Fuzzificador  
         JFuzzyChart.get().chart(functionBlock);
          System.out.println("\nFuzzy inputs: ");
-         System.out.println("\n"+varname1+" - "+value1);
-         System.out.println("\n"+varname2+" - "+value2);
-         System.out.println("\n"+varname3+" - "+value3);
+         System.out.println("\n"+varname1+" | "+value1);
+         System.out.println("\n"+varname2+" | "+value2);
+         System.out.println("\n"+varname3+" | "+value3);
      // Set inputs
         fis.setVariable(varname1, value1);
         fis.setVariable(varname2, value2);
