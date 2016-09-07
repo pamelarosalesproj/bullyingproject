@@ -5,6 +5,18 @@
  */
 package edu.bullyingmestrado.fuzzification;
 
+import edu.bullyingmestrado.classification.Classification;
+import edu.bullyingmestrado.classification.Tokenizer;
+import edu.bullyingmestrado.classification.Tokens2FeatureVector;
+import edu.bullyingmestrado.commons.Constants;
+import edu.bullyingmestrado.entities.Tweet;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author pamela
@@ -13,111 +25,68 @@ public class ReadTweets {
         /**
 	 * Inicio do Severity Tool
 	 * */
-	public static void main(String [] args){
-			String modeloAUsar = null;
-			String line = null;
-			String rptaIsBullyingTrace = null;
-			String filePath = "C:/Users/pamela/Desktop/archivoOut.txt";		
-			String linea1 = "sep=|" + System.getProperty("line.separator");
-			boolean primeraLinea = true;
+    
+        static String[] classifier_type = { Constants.CLA_TRACE,        Constants.CLA_TEASING,    
+                                            Constants.CLA_AUTHOR_ROLE,  Constants.CLA_FORM     
+                                        }; 
+         
+        public static void main(String[] args){
+            String modeloAUsar = null;
+            String line = null;
+            String rptaIsBullyingTrace = null;
+            String filePath = "C:/Users/pamela/Desktop/archivoOut.txt";		
+            String linea1 = "sep=|" + System.getProperty("line.separator");
+            boolean primeraLinea = true;
 			
-			try {
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-									Classification.class.getResourceAsStream("/model/test.txt")));
+            try {
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				ReadTweets.class.getResourceAsStream(Constants.PATH_TWEETS_INI)));
 
-				while ((line = br.readLine()) != null) {					
-					if (!checkInput(line) )continue;					
-					/*Paso 1: Ejecutar Bullying Trace Clasificador*/
-					modeloAUsar = "trace";
-					ArrayList<String> tokens = null;
-					Tokenizer tokenizer = new Tokenizer();
-						
-					Tokens2FeatureVector t2v = new Tokens2FeatureVector();
-					t2v.loadVocab("/model/vocab");
-
-					Classification BullyingTrace = new Classification();
-					try {
-						BullyingTrace.loadModel("/model/"+ modeloAUsar.toLowerCase());
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+                while ((line = br.readLine()) != null) {					
+                    /*@pamela --> Don't process line that don't fulfill the requirements of Enrichment*/
+                    if (!Classification.checkInput(line) )continue;					
+                    
+                    /*@pamela --> Use the 1st classifier 'Bullying Trace Classifier' that is a filter*/              
+                    Tweet tweet = new Tweet(line);
+                    ArrayList<String> tokens;
+		    Tokenizer tokenizer = new Tokenizer();
+                    Tokens2FeatureVector t2v = new Tokens2FeatureVector();
+                    t2v.loadVocab(Constants.PATH_VOCAB);
+                    Classification clasifBullyingTrace = new Classification(Constants.CLA_TRACE);
+		    clasifBullyingTrace.loadModel();
+                    tokens = tokenizer.tokenize(line);
+                    t2v.covertFeatureVector(tokens);
+                    clasifBullyingTrace.classify(t2v.getIndexSet(), t2v.getValueSet());
+                    
+                    //REVISAR.. PARA ESCRIBIR CSV
+                    if (primeraLinea ){
+			//REVISAR escribirResultadoClasificacion(linea1, filePath);
+			primeraLinea=false;
+                    }
 					
-					
-					tokens = tokenizer.tokenize(line);
-					t2v.covertFeatureVector(tokens);
-					rptaIsBullyingTrace= BullyingTrace.classify(t2v.getIndexSet(), t2v.getValueSet());
-					//System.out.println("Respuesta Clasificador Bullying Trace :"  + rptaIsBullyingTrace);
+                    /*@pamela --> If bullying trace classifier gives YES, continue with the other classifiers*/
+                    if (clasifBullyingTrace.getClassResult().toUpperCase().equals(Constants.CLA_YES_BTRACE)){
+			for (String classifierName : classifier_type){
+                            t2v = new Tokens2FeatureVector();
+                            t2v.loadVocab(Constants.PATH_VOCAB);
+                            
+                            Classification classifier = new Classification(classifierName);
+                            classifier.loadModel();
+                            classifier.classify(t2v.getIndexSet(), t2v.getValueSet());
+                            
+                            /*@pamela --> set attributes of the tweet*/
+                            tweet.addClassifier(classifier);
+                            tweet.setTokens(tokens);
+                            tweet.setFv(t2v.getFv());
+			}
+			
+                        /*@pamela --> Evaluate if tweet will be processed in the fuzzification process*/
+			if (tweet.validateTweetForFuzzification());
+                                tweet.fuzzificationProcess();
+			
+                    }
+		}
 				
-					if (primeraLinea ){
-						escribirResultadoClasificacion(linea1, filePath);
-						primeraLinea=false;
-					}
-					
-					/*Paso 2: Ejecutar los demás clasificadores si se trata de Bullying Trace*/
-					if (rptaIsBullyingTrace.equals("yes")){
-						String nuevalinea="";
-						String content="";
-						String rotulos = "";
-						HashMap<String, Double> rotulosConValores  = new HashMap<String, Double>();;     
-						double resultadoFuzzy=0.0;
-						
-						for (String cadena : clasificadoresAUsarParaFuzzy){
-							
-							//System.out.println("El clasificador es:" + cadena);
-							String rptaClasificador = "";
-							tokens = null;
-							tokenizer = new Tokenizer();
-							double valorRotulo =0;
-							
-							t2v = new Tokens2FeatureVector();
-							t2v.loadVocab("/model/vocab");
-
-							Classification clasificador = new Classification();
-							try {
-								clasificador.loadModel("/model/"+ cadena.toLowerCase());
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
-
-							tokens = tokenizer.tokenize(line);
-							t2v.covertFeatureVector(tokens);
-							rptaClasificador= clasificador.classify(t2v.getIndexSet(), t2v.getValueSet());
-							rotulos = rotulos + "|" + rptaClasificador;
-							valorRotulo = clasificador.getValue();
-							
-							if (rptaClasificador.equals("yes") || rptaClasificador.equals("no")) rptaClasificador="teasing";
-							
-							rotulosConValores.put(rptaClasificador, valorRotulo);
-							//System.out.println("Respuesta Clasificador " + cadena + " : "+ rptaClasificador);
-						}
-						/*Paso 3: Imprimir resultados*/
-						/*Imprimir resultados por línea*/
-						
-						nuevalinea = System.getProperty("line.separator");
-					    line= completarTweet(line);
-					    /*1julio*/
-					   // content = line  + rotulos +nuevalinea;
-					    		
-					    //escribirResultadoClasificacion(content, filePath);
-					  
-					    
-						resultadoFuzzy =iterarRotulosConValores(rotulosConValores);
-						System.out.println("entro..." + resultadoFuzzy);
-						if (resultadoFuzzy != -9999999)
-						{	//Si se va a fuzzificar
-							content = line  + rotulos + "|" + resultadoFuzzy + nuevalinea;
-							System.out.println("entro...");
-							escribirResultadoClasificacion(content, filePath);
-						}
-					}
-				
-				
-				
-				
-				
-				}
-				
-				System.out.println("***FIN****");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

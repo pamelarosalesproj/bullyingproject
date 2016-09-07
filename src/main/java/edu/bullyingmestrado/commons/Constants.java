@@ -33,20 +33,49 @@ public final class Constants {
 	  public static final String CLA_AUTHOR_ROLE    = "author_role";
 	  public static final String CLA_FORM           = "form";
 	  
+          /* Labels of Binary Classifier */
+          public static final String CLA_YES = "YES";
+          public static final String CLA_NO = "NO";
+          //Classifier Bullying Trace
+          public static final String CLA_YES_BTRACE     = "YES_TRACE";
+          public static final String CLA_NO_BTRACE      = "NO_TRACE";
+          //Classifier Teasing Trace
+          public static final String CLA_YES_TEASING    = "YES_TEASING";
+          public static final String CLA_NO_TEASING     =  "NO_TEASING";
+
+          /* Labels of Multiclasses Classifier */
+          //Classifier Author
+          public static final String CLA_AUTH_VICTIM    = "victim";
+          public static final String CLA_AUTH_BULLY     =  "bully";
+          public static final String CLA_AUTH_DEFENDER  =  "defender";
+          public static final String CLA_AUTH_REPORTER  =  "reporter";
+          public static final String CLA_AUTH_ACCUSER   =  "accuser";
+          public static final String CLA_AUTH_OTHER   =  "other";
+         
+          //Classifier Form
+          public static final String CLA_FORM_PHYSICAL   = "physical";
+          public static final String CLA_FORM_VERBAL    =  "verbal";
+          public static final String CLA_FORM_GENERAL    =  "general";
+          public static final String CLA_FORM_CYBERBULLYING    =  "cyberbullying";
+
+
+        
           /*
-          Variables used by classifiers
+          Variables used by classifiers & fuzzification
           */
           public static final String VCLASIF_NR_CLASS = "nr_class";
           public static final String VCLASIF_LABEL = "label";
           public static final String VCLASIF_NR_FEATURE ="nr_feature";
           public static final String VCLASIF_BIAS ="bias";
           public static final String VCLASIF_WEIGH ="w";
+          public static final String V_SEVERITY ="Severity";
           /**
            * Path for file used in ProjetoBullyingMestrado Netbeans
            */
           public static final String PATH_TWEETS_INI = "/tweets/test.txt";
           public static final String PATH_MODELS = "/model/";
           public static final String PATH_FCL = "/fcl/";
+          public static final String PATH_VOCAB = "/model/vocab";
           
           /**
            Error, Warnings and Success Messages
@@ -55,7 +84,7 @@ public final class Constants {
            public static final String MSG_WARN_ENRICH_NOWORDBULL = "(Warning: line does not contain string \"bull\"): ";
            public static final String MSG_WARN_ENRICH_MAX150 = "(Warning: line longer than 150 characters): ";   
            public static final String MSG_WARN_ENRICH_EXISTRT = "(Warning: line contains \"RT\", retweet?): ";
-           
+           public static final String MSG_ERROR_NOFILE = "ERROR - The file wasn't found : '";
            
            /**
             List of keywords used in Bullying context
@@ -77,6 +106,8 @@ public final class Constants {
            public static final String KW_BULLYER= "bullyer";
            public static final String KW_BULLING= "bulling";
            
-
-
+           /*
+           List of format extensions
+           */
+           public static final String EXT_FCL = ".fcl";
 }

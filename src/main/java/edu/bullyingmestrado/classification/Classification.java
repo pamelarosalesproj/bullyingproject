@@ -39,19 +39,15 @@ import java.io.InputStreamReader;
  * @author Jun-Ming Xu
  * Modified by Pamela Rosales
  */
-public class Classification {
+public class Classification implements Comparable<Classification>{
     
         
         private static final Logger logger = LogManager.getLogger(Classification.class.getName());
 
-        public double value;
-        public String classResult;
-        public String classifierName;
-
-    
-
-    
-    
+        double value;
+        String classResult; //label
+        String classifierName;
+        String pathModel;
 	static String[] keywords = {    Constants.KW_IGNORED, Constants.KW_PUSHED ,
                                         Constants.KW_RUMORS , Constants.KW_LOCKER ,
                                         Constants.KW_SPREAD , Constants.KW_SHOVED ,
@@ -75,9 +71,14 @@ public class Classification {
         //max and min  values of classes
         static double[][] borders;
         
+        public Classification(){
+            this.value = 0.0;
+        }
+        
         public Classification(String classifierName) {
             this.value = 0.0;
-            this.classifierName= classifierName;
+            this.classifierName= classifierName.toLowerCase();
+            this.pathModel = Constants.PATH_MODELS + this.classifierName;
         }
 
 
@@ -99,6 +100,14 @@ public class Classification {
 
         public void setClassifierName(String classifierName) {
             this.classifierName = classifierName;
+        }
+        
+        public String getPathModel() {
+        return pathModel;
+    }
+
+        public void setPathModel(String pathModel) {
+            this.pathModel = pathModel;
         }
           
 
@@ -133,9 +142,9 @@ public class Classification {
 		return true;
 	}
 
-	public boolean loadModel(String file) throws Exception {
+	public boolean loadModel() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
-				Classification.class.getResourceAsStream(file)));
+				Classification.class.getResourceAsStream(this.pathModel)));
 		String line = br.readLine();  // ignore first line
 
 		//@pamela --> Read the number of classes according to the chosen classifier";
@@ -253,7 +262,13 @@ public class Classification {
                 
                 this.classResult = class_labels[idx];
                 this.value = max_margin;
-        } 
+        }
+        
+        
+        @Override
+        public int compareTo(Classification c) {
+            return (this.classifierName).compareTo(c.getClassifierName());
+        }
 
        
 }

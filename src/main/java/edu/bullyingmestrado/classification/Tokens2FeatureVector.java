@@ -16,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 
 
@@ -25,12 +24,21 @@ public class Tokens2FeatureVector {
 	HashMap<String, Integer> vocab; 
 	
 	FeatureVector fv;
-	
+
+        public FeatureVector getFv() {
+            return fv;
+        }
+
+        public void setFv(FeatureVector fv) {
+            this.fv = fv;
+        }
+
+        
 	public void loadVocab(String file){
-		vocab = new HashMap<String, Integer>();
+		vocab = new HashMap<>();
 		try{
 			BufferedReader br = new BufferedReader(new InputStreamReader(Tokens2FeatureVector.class.getResourceAsStream(file)));
-			String line = null;
+			String line;
 			int index = 0;
 			while ((line = br.readLine()) != null){
 				vocab.put(line.trim(), index);
@@ -66,45 +74,3 @@ public class Tokens2FeatureVector {
 	}
 }
 
-class FeatureVector {
-
-	protected HashSet<Integer> index;
-	protected double[] values;
-	
-	public FeatureVector(int size){
-		index = new HashSet<Integer>();
-		values = new double[size];
-	}
-	
-	public void increase(Integer i){
-		index.add(i);
-		values[i] += 1.0;
-	}
-	
-	public void normalize(){
-		double ss = 0.0;
-		for (int i : index)
-			ss += values[i] * values[i];
-		ss = Math.sqrt(ss);
-		for (int i : index)
-			values[i] /= ss;
-	}
-	
-	public Integer[] getIndexSet(){
-		return index.toArray(new Integer[index.size()]);
-	}
-	
-	public double[] getValueSet(){
-		return values;
-	}
-	
-	public String toString() {
-		StringBuffer output = new StringBuffer();
-		for (int i : index) {
-			output.append(i + ":" + values[i] + "\t");
-		}
-		output.append("\n");
-		return output.toString();
-	}
-	
-}
