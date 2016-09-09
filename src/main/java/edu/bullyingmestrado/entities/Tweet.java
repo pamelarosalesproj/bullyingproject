@@ -21,6 +21,7 @@ import java.util.Map;
  */
 public class Tweet {
         private String text;
+        private boolean isTextEnriched;
         private ArrayList<String> tokens;
         private FeatureVector fv;
         Map<String, Classification> mapClassifiers;
@@ -30,6 +31,14 @@ public class Tweet {
                                         }; 
         private double valueSeverity;
 
+    public boolean getIsTextEnriched() {
+        return isTextEnriched;
+    }
+
+    public void setIsTextEnriched(boolean isTextEnriched) {
+        this.isTextEnriched = isTextEnriched;
+    }    
+        
     public boolean getValidForFuzzified() {
         return this.validForFuzzified;
     }
@@ -53,12 +62,20 @@ public class Tweet {
         public Tweet(){
             mapClassifiers = new HashMap<>();
             this.validForFuzzified = false;
+            this.isTextEnriched=false;
         }
         
         public Tweet(String text){
             this.text = text;
             mapClassifiers = new HashMap<>();
             this.validForFuzzified = false;
+             this.isTextEnriched=false;
+        }
+        
+        public Tweet(String text, boolean validForFuzzified ){
+            this.text = text;
+            this.validForFuzzified= validForFuzzified;
+            mapClassifiers = new HashMap<>();        
         }
         
         
@@ -107,9 +124,10 @@ public class Tweet {
                     classifier.getClassResult().equals(Constants.CLA_AUTH_REPORTER) ||
                     classifier.getClassResult().equals(Constants.CLA_AUTH_OTHER) ||
                     classifier.getClassResult().equals(Constants.CLA_FORM_GENERAL) 
-                    )
+                    ){
                     this.validForFuzzified = false;
-                return this.validForFuzzified;
+                    return this.validForFuzzified;
+                }
             }
             
             this.validForFuzzified = true;

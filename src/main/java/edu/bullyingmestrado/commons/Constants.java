@@ -5,6 +5,10 @@
  */
 package edu.bullyingmestrado.commons;
 
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author pamela
@@ -18,7 +22,9 @@ public final class Constants {
 	  public static final String PERIOD = ".";
 	  public static final String DOUBLE_QUOTE = "\"";
           public static final String UNDERLINE = "_";
-          
+          public static final String COMMA_DELIMITER = ",";
+          public static final String NEW_LINE_SEPARATOR = "\n";
+          public static final String VERTICALBAR_DELIMITER = "|";
           /*
           * Words used in tweets that will be cleaned or replaced
           */
@@ -110,4 +116,18 @@ public final class Constants {
            List of format extensions
            */
            public static final String EXT_FCL = ".fcl";
+           
+           /**
+            Structure for *.csv files
+            */
+           public static final String CSV_REPORTTWEETS_FILE_HEADER ="Original Tweet |is a Enriched Tweet?|Bullying Trace?|Teasing Trace?|Bullying Form?|Author Role|Valid for Fuzzification?|Severity";
+
+           public static String getCSVFilename(){
+                Date dNow = new Date( );
+                SimpleDateFormat ft = 
+                new SimpleDateFormat ("yyyy-mm-dd_HH-mm-ss");
+		String fileName = "E:/tweetsCSV/reportTweet" + ft.format(dNow)+ ".csv";	
+                return fileName;
+            }
+
 }
