@@ -29,11 +29,11 @@ public class Fuzzification {
             System.err.println("ERROR - No se puede encontrar el archivo: '" + fileName + "'");
            
         }
-     // Obtener el conjunto de Reglas
+        //Obtener el conjunto de Reglas
         FunctionBlock functionBlock = fis.getFunctionBlock(null);
   
      // Entradas del Fuzzificador  
-     //   JFuzzyChart.get().chart(functionBlock);
+        JFuzzyChart.get().chart(functionBlock);
          System.out.println("\nFuzzy inputs: ");
          System.out.println("\n"+varname1+" | "+value1);
          System.out.println("\n"+varname2+" | "+value2);
@@ -50,7 +50,7 @@ public class Fuzzification {
         fis.getVariable(Constants.V_SEVERITY).getLatestDefuzzifiedValue();
         
      // Grafico del fuzzificador
-     //  JFuzzyChart.get().chart(fis.getVariable(Constants.V_SEVERITY), fis.getVariable(Constants.V_SEVERITY).getDefuzzifier(), true);
+       JFuzzyChart.get().chart(fis.getVariable(Constants.V_SEVERITY), fis.getVariable(Constants.V_SEVERITY).getDefuzzifier(), true);
 
      
         double result =  fis.getVariable(Constants.V_SEVERITY).getLatestDefuzzifiedValue();

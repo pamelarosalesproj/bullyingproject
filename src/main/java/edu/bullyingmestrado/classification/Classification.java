@@ -56,7 +56,7 @@ public class Classification implements Comparable<Classification>{
                                         Constants.KW_KICKED,  Constants.KW_CRYING,
                                         Constants.KW_BULLYED, Constants.KW_BULLIED,
                                         Constants.KW_BULLYNG, Constants.KW_BULLYER,
-                                        Constants.KW_BULLING
+                                        Constants.KW_BULLING, Constants.KW_BULLY
                                     };
 
 	static String[] classifier_type = { Constants.CLA_TRACE,        Constants.CLA_TEASING,    
@@ -118,7 +118,6 @@ public class Classification implements Comparable<Classification>{
 	public static boolean checkInput(String text) {
 		if (text.length() > 150) {
 			System.err.println("(Warning: line longer than 150 characters): " + text);
-                        logger.warn("hola");
 			return false;
 		}
 		String lowerCase = text.toLowerCase();

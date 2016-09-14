@@ -111,7 +111,7 @@ public final class Constants {
            public static final String KW_BULLYNG= "bullying";
            public static final String KW_BULLYER= "bullyer";
            public static final String KW_BULLING= "bulling";
-           
+           public static final String KW_BULLY= "bully";
            /*
            List of format extensions
            */

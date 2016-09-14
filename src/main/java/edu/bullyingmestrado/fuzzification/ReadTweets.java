@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,11 +32,9 @@ public class ReadTweets {
                                             Constants.CLA_FORM,
                                             Constants.CLA_AUTHOR_ROLE
                                         }; 
-         
-        public static void addColumnInCSV(FileWriter fileWriter, String text, String characterAfterText) throws IOException{
-                fileWriter.append(text);
-		fileWriter.append(characterAfterText);
-        }
+        List<Tweet> listTweets  = new ArrayList<>(); 
+        
+       
         
         
         public static void main(String[] args){
@@ -55,23 +54,12 @@ public class ReadTweets {
                     
                     while ((line = br.readLine()) != null) {		
                         Tweet tweet = new Tweet(line);
-                        /*@pamela-In Column CSV: (1)Original Tweet*/
-			//addColumnInCSV(fileWriter,tweet.getText(),Constants.VERTICALBAR_DELIMITER);
-                        fileWriter.append(tweet.getText());
-                        fileWriter.append(Constants.VERTICALBAR_DELIMITER);                        
+                                        
                         /*@pamela --> Don't process line that don't fulfill the requirements of Enrichment*/
                         if (!Classification.checkInput(line) ){
-                            /*@pamela-In Column CSV: (2) Is a Enriched Tweet?*/
-                           // addColumnInCSV(fileWriter,Boolean.toString(tweet.getIsTextEnriched()),Constants.NEW_LINE_SEPARATOR);
-                            fileWriter.append(Boolean.toString(tweet.getIsTextEnriched()));
-                            fileWriter.append(Constants.NEW_LINE_SEPARATOR);    
                             continue;
                         }
                         tweet.setIsTextEnriched(true);
-                        /*@pamela-In Column CSV: (2) Is a Enriched Tweet?*/
-                        //addColumnInCSV(fileWriter,Boolean.toString(tweet.getIsTextEnriched()),Constants.VERTICALBAR_DELIMITER);
-                        fileWriter.append(Boolean.toString(tweet.getIsTextEnriched()));
-                        fileWriter.append(Constants.VERTICALBAR_DELIMITER);  
                         
                         
                         /*@pamela --> Use the 1st classifier 'Bullying Trace Classifier' that is a filter*/              
@@ -89,11 +77,6 @@ public class ReadTweets {
                         
                         /*@pamela --> If bullying trace classifier gives YES, continue with the other classifiers*/
                         if (clasifBullyingTrace.getClassResult().toUpperCase().equals(Constants.CLA_YES_BTRACE)){
-                            /*@pamela-In Column CSV: (3) Is a BullyingTrace?*/
-                            //addColumnInCSV(fileWriter,clasifBullyingTrace.getClassResult(),Constants.VERTICALBAR_DELIMITER);
-                            fileWriter.append(clasifBullyingTrace.getClassResult());
-                            fileWriter.append(Constants.VERTICALBAR_DELIMITER);  
-                            
                             for (String classifierName : classifier_type){
                                
                                 t2v.loadVocab(Constants.PATH_VOCAB);
@@ -101,10 +84,6 @@ public class ReadTweets {
                                 Classification classifier = new Classification(classifierName);
                                 classifier.loadModel();
                                 classifier.classify(t2v.getIndexSet(), t2v.getValueSet());
-                                /*@pamela-In Column CSV: (4,5,6) */
-                                //addColumnInCSV(fileWriter,classifier.getClassResult(),Constants.VERTICALBAR_DELIMITER);
-                                fileWriter.append(classifier.getClassResult());
-                                fileWriter.append(Constants.VERTICALBAR_DELIMITER);  
                                 
                                 /*@pamela --> set attributes of the tweet*/
                                 tweet.addClassifier(classifier);
@@ -117,21 +96,7 @@ public class ReadTweets {
                                     tweet.fuzzificationProcess();
                             }
                             
-                            /*@pamela-In Column CSV: (7) is valid for fuzzification*/
-                                //addColumnInCSV(fileWriter,Boolean.toString(tweet.getValidForFuzzified()),Constants.VERTICALBAR_DELIMITER);
-                                fileWriter.append(Boolean.toString(tweet.getValidForFuzzified()));
-                                fileWriter.append(Constants.VERTICALBAR_DELIMITER);  
-                                
-                                
-                             /*@pamela-In Column CSV: (8) Severity value*/
-                                //addColumnInCSV(fileWriter,Double.toString(tweet.getValueSeverity()),Constants.NEW_LINE_SEPARATOR);
-                                fileWriter.append(Double.toString(tweet.getValueSeverity()));
-                                fileWriter.append(Constants.NEW_LINE_SEPARATOR);  
-                        }else{
-                            /*@pamela-In Column CSV: (3) Is a BullyingTrace?*/
-                            //addColumnInCSV(fileWriter,clasifBullyingTrace.getClassResult(),Constants.NEW_LINE_SEPARATOR);
-                            fileWriter.append(clasifBullyingTrace.getClassResult());
-                            fileWriter.append(Constants.NEW_LINE_SEPARATOR);  
+                
                         }
                         
                         
