@@ -7,8 +7,11 @@ package edu.bullyingmestrado.entities;
 
 import edu.bullyingmestrado.classification.Classification;
 import edu.bullyingmestrado.classification.FeatureVector;
+import edu.bullyingmestrado.classification.Tokenizer;
+import edu.bullyingmestrado.classification.Tokens2FeatureVector;
 import edu.bullyingmestrado.commons.Constants;
 import edu.bullyingmestrado.fuzzification.Fuzzification;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,9 +29,7 @@ public class Tweet {
         private FeatureVector fv;
         Map<String, Classification> mapClassifiers;
         private boolean validForFuzzified;
-        static String[] classifier_type = { Constants.CLA_TRACE,        Constants.CLA_TEASING,    
-                                            Constants.CLA_AUTHOR_ROLE,  Constants.CLA_FORM     
-                                        }; 
+        
         private double valueSeverity;
 
     public boolean getIsTextEnriched() {
@@ -117,7 +118,7 @@ public class Tweet {
         }
         
         public boolean validateTweetForFuzzification(){
-            for(String classifierName : classifier_type){
+            for(String classifierName : Constants.classifier_type){
                 Classification classifier = this.mapClassifiers.get(classifierName);
                 if (classifier.getClassResult().equals(Constants.CLA_AUTH_ACCUSER) ||
                     classifier.getClassResult().equals(Constants.CLA_AUTH_DEFENDER) ||
@@ -132,6 +133,82 @@ public class Tweet {
             
             this.validForFuzzified = true;
             return this.validForFuzzified ;
+        }
+        
+        public TweetCSV convertToTweetCSV(){
+            TweetCSV tweetCSV = new TweetCSV();
+            tweetCSV.setText(this.text);
+            tweetCSV.setIsEnriched(this.isTextEnriched);
+            for(String key : this.mapClassifiers.keySet()){
+                    Classification classifier = this.mapClassifiers.get(key);
+                    
+                    if (classifier.getClassifierName().equals(Constants.CLA_TRACE)){
+                        tweetCSV.setClassBullyingTrace(classifier.getClassResult());
+                        tweetCSV.setValueBullyingTrace(classifier.getValue());
+                    }
+                    
+                    if (classifier.getClassifierName().equals(Constants.CLA_TEASING)){
+                        tweetCSV.setClassTeasingTrace(classifier.getClassResult());
+                        tweetCSV.setValueTeasingTrace(classifier.getValue());
+                    }
+                    
+                    if (classifier.getClassifierName().equals(Constants.CLA_FORM)){
+                        tweetCSV.setClassFormBullying(classifier.getClassResult());
+                        tweetCSV.setValueFormBullying(classifier.getValue());
+                    }
+                    
+                    if (classifier.getClassifierName().equals(Constants.CLA_AUTHOR_ROLE)){
+                        tweetCSV.setClassAuthor(classifier.getClassResult());
+                        tweetCSV.setValueAuthor(classifier.getValue());
+                    }
+                    
+            }
+            
+            tweetCSV.setValueSeverity(this.valueSeverity);
+            tweetCSV.setIsValidForFuzzification(this.validForFuzzified);
+            return tweetCSV;
+        }
+        
+        public void process() throws IOException{
+            /*@pamela --> Don't process line that don't fulfill the requirements of Enrichment*/
+                        if (!Classification.checkInput(this.text) ){
+                            return;
+                        }
+                        this.setIsTextEnriched(true);
+                        
+                        /*@pamela --> Convert text to vector according to vocabulary*/
+                        Tokenizer tokenizer = new Tokenizer();
+                        Tokens2FeatureVector t2v = new Tokens2FeatureVector();
+                        t2v.loadVocab(Constants.PATH_VOCAB);
+                        this.tokens = tokenizer.tokenize(this.text);
+                        t2v.covertFeatureVector(tokens);
+                        this.setFv(t2v.getFv());
+                        
+                        /*@pamela --> Use the 1st classifier 'Bullying Trace Classifier' that is a filter*/              
+                        Classification clasifBullyingTrace = new Classification(Constants.CLA_TRACE);
+                        clasifBullyingTrace.loadModel();
+                        clasifBullyingTrace.classify(t2v.getIndexSet(), t2v.getValueSet());
+                       /*@pamela --> Add Bullying Trace classifier to tweet*/
+                        this.addClassifier(clasifBullyingTrace);
+                        
+                        /*@pamela --> If bullying trace classifier gives YES, continue with the other classifiers*/
+                        if (clasifBullyingTrace.getClassResult().toUpperCase().equals(Constants.CLA_YES_BTRACE)){
+                            for (String classifierName : Constants.classifier_type_withoutBullyingTrace){
+                                Classification classifier = new Classification(classifierName);
+                                classifier.loadModel();
+                                classifier.classify(t2v.getIndexSet(), t2v.getValueSet());
+                                
+                                /*@pamela --> set attributes of the tweet*/
+                                this.addClassifier(classifier);
+                            }
+
+                            /*@pamela --> Evaluate if tweet will be processed in the fuzzification process*/
+                            if (this.validateTweetForFuzzification()){
+                                    this.fuzzificationProcess();
+                            }
+                            
+                
+                        }
         }
 
 }

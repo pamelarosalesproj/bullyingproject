@@ -5,11 +5,15 @@
  */
 package edu.bullyingmestrado.fuzzification;
 
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.BeanToCsv;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
 import edu.bullyingmestrado.classification.Classification;
 import edu.bullyingmestrado.classification.Tokenizer;
 import edu.bullyingmestrado.classification.Tokens2FeatureVector;
 import edu.bullyingmestrado.commons.Constants;
 import edu.bullyingmestrado.entities.Tweet;
+import edu.bullyingmestrado.entities.TweetCSV;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,96 +29,88 @@ import java.util.List;
 public class ReadTweets {
         /**
 	 * Inicio do Severity Tool
-	 * */
+	 *
+     * @param listTweets */
     
-         /*@pamela --> Only classifiers that will be used after bullying trace classifier filter*/
-        static String[] classifier_type = { Constants.CLA_TEASING, 
-                                            Constants.CLA_FORM,
-                                            Constants.CLA_AUTHOR_ROLE
-                                        }; 
-        List<Tweet> listTweets  = new ArrayList<>(); 
         
+       public static void writeCSVTweets(List<TweetCSV> listTweets){
+       /*@pamela-In Column CSV: (1)Original Tweet*/
+       /*@pamela-In Column CSV: (2) Is a Enriched Tweet?*/
+       /*@pamela-In Column CSV: (3) Is a BullyingTrace?*/
+        /*@pamela-In Column CSV: (4,5,6) */
+        /*@pamela-In Column CSV: (7) is valid for fuzzification*/
+         /*@pamela-In Column CSV: (8) Severity value*/
+            String fileName = Constants.getCSVFilename();
+            CSVWriter csvWriter = null;
+		try
+		{
+			//Create CSVWriter for writing to Tweets.csv 
+			csvWriter = new CSVWriter(new FileWriter(fileName));
+                        BeanToCsv bc = new BeanToCsv();
+                        //mapping of columns with their positions
+                        ColumnPositionMappingStrategy mappingStrategy = new ColumnPositionMappingStrategy();
+                        //Set mappingStrategy type to Employee Type
+                        mappingStrategy.setType(TweetCSV.class);
+            //Fields in Employee Bean
+            String[] columns = new String[]{"text","isEnriched","classBullyingTrace",
+"valueBullyingTrace","classTeasingTrace",
+"valueTeasingTrace","classFormBullying",
+"valueFormBullying","classAuthor",
+"valueAuthor", "isValidForFuzzification",
+"valueSeverity"};
+            
+            
+            
+            
+            
+            //Setting the colums for mappingStrategy
+            mappingStrategy.setColumnMapping(columns);
+            //Writing empList to csv file
+            bc.write(mappingStrategy,csvWriter,listTweets);
+            System.out.println("CSV File written successfully!!!");
+                
+                }
+                catch(Exception e){}
+                finally
+		{
+			try
+			{
+				//closing the writer
+				csvWriter.close();
+			}
+			catch(Exception ee)
+			{
+                            System.out.println("error.. flushh");
+				ee.printStackTrace();
+			}
+		}
        
+       } 
         
         
         public static void main(String[] args){
             String line;
-            FileWriter fileWriter=null;
+            List<TweetCSV> listTweets  = new ArrayList<>(); 
             try {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
 				ReadTweets.class.getResourceAsStream(Constants.PATH_TWEETS_INI)));
                     
-                    
-                    String fileName = Constants.getCSVFilename();
-                    fileWriter = new FileWriter(fileName);
-                    fileWriter.append("sep="+Constants.VERTICALBAR_DELIMITER + Constants.NEW_LINE_SEPARATOR);
-
-                    fileWriter.append(Constants.CSV_REPORTTWEETS_FILE_HEADER);
-                    fileWriter.append(Constants.NEW_LINE_SEPARATOR);
-                    
+                    Tweet tweet;
+                    TweetCSV tweetCSV;
                     while ((line = br.readLine()) != null) {		
-                        Tweet tweet = new Tweet(line);
-                                        
-                        /*@pamela --> Don't process line that don't fulfill the requirements of Enrichment*/
-                        if (!Classification.checkInput(line) ){
-                            continue;
-                        }
-                        tweet.setIsTextEnriched(true);
-                        
-                        
-                        /*@pamela --> Use the 1st classifier 'Bullying Trace Classifier' that is a filter*/              
-                        ArrayList<String> tokens;
-                        Tokenizer tokenizer = new Tokenizer();
-                        Tokens2FeatureVector t2v = new Tokens2FeatureVector();
-                        t2v.loadVocab(Constants.PATH_VOCAB);
-                        Classification clasifBullyingTrace = new Classification(Constants.CLA_TRACE);
-                        clasifBullyingTrace.loadModel();
-                        tokens = tokenizer.tokenize(line);
-                        t2v.covertFeatureVector(tokens);
-                        clasifBullyingTrace.classify(t2v.getIndexSet(), t2v.getValueSet());
-                       /*@pamela --> Add Bullying Trace classifier to tweet*/
-                        tweet.addClassifier(clasifBullyingTrace);
-                        
-                        /*@pamela --> If bullying trace classifier gives YES, continue with the other classifiers*/
-                        if (clasifBullyingTrace.getClassResult().toUpperCase().equals(Constants.CLA_YES_BTRACE)){
-                            for (String classifierName : classifier_type){
-                               
-                                t2v.loadVocab(Constants.PATH_VOCAB);
-
-                                Classification classifier = new Classification(classifierName);
-                                classifier.loadModel();
-                                classifier.classify(t2v.getIndexSet(), t2v.getValueSet());
-                                
-                                /*@pamela --> set attributes of the tweet*/
-                                tweet.addClassifier(classifier);
-                                tweet.setTokens(tokens);
-                                tweet.setFv(t2v.getFv());
-                            }
-
-                            /*@pamela --> Evaluate if tweet will be processed in the fuzzification process*/
-                            if (tweet.validateTweetForFuzzification()){
-                                    tweet.fuzzificationProcess();
-                            }
-                            
-                
-                        }
-                        
+                        tweet = new Tweet(line);
+                        tweet.process();
+                        tweetCSV= tweet.convertToTweetCSV();
+                        /*@pamela --> Add tweet to the list of tweets*/
+                        listTweets.add(tweetCSV);
                         
                     }
+                    
+                  writeCSVTweets(listTweets);  
 		} catch (IOException e) {
                     System.out.println("Nao se encontro arquivo");
 		}catch (Exception e) {
                     e.printStackTrace();
-		}finally {
-			
-			try {
-				fileWriter.flush();
-				fileWriter.close();
-			} catch (IOException e) {
-				System.out.println("Error while flushing/closing fileWriter !!!");
-                e.printStackTrace();
-			}
-			
 		}
 
 

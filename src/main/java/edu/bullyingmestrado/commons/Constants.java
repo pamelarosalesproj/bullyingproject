@@ -39,6 +39,15 @@ public final class Constants {
 	  public static final String CLA_AUTHOR_ROLE    = "author_role";
 	  public static final String CLA_FORM           = "form";
 	  
+          
+          public static String[] classifier_type_withoutBullyingTrace = { Constants.CLA_TEASING, 
+                                            Constants.CLA_FORM,
+                                            Constants.CLA_AUTHOR_ROLE
+                                        }; 
+          public static String[] classifier_type = { Constants.CLA_TRACE,        Constants.CLA_TEASING,    
+                                            Constants.CLA_AUTHOR_ROLE,  Constants.CLA_FORM     
+                                        }; 
+          
           /* Labels of Binary Classifier */
           public static final String CLA_YES = "YES";
           public static final String CLA_NO = "NO";
@@ -125,7 +134,7 @@ public final class Constants {
            public static String getCSVFilename(){
                 Date dNow = new Date( );
                 SimpleDateFormat ft = 
-                new SimpleDateFormat ("yyyy-mm-dd_HH-mm-ss");
+                new SimpleDateFormat ("yyyy-MM-dd_HH-mm-ss");
 		String fileName = "E:/tweetsCSV/reportTweet" + ft.format(dNow)+ ".csv";	
                 return fileName;
             }
