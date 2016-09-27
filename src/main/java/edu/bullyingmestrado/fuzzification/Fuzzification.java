@@ -8,37 +8,44 @@ import edu.bullyingmestrado.commons.Constants;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 /**
  *
  * @author pamela
  */
 public class Fuzzification {
     
+    private static final Logger logger = LogManager.getLogger(Fuzzification.class.getName());
+
     public Fuzzification() {
     
     }
      
     public double getFuzzy(String varname1, String varname2, String varname3, 
                             double value1, double value2, double value3){
-    	String fileName = "src/main/resources/fcl/" +varname1+ Constants.UNDERLINE + varname2+ Constants.EXT_FCL;
-        System.out.println("nome arquivo fcl " + fileName);
+        
+    	String fileName = Constants.PATH_LONG_FCL +varname1+ Constants.UNDERLINE + varname2+ Constants.EXT_FCL;
+
+        logger.info(Constants.MSG_INFO_FILECREATED + fileName + Constants.SINGLE_QUOTE);
         FIS fis = FIS.load(fileName,true);
 
-        // Cargar el archivo FCL
+        // Load the FCL file according to the inputs
         if( fis == null ) { 
-            System.err.println("ERROR - No se puede encontrar el archivo: '" + fileName + "'");
+           logger.error(Constants.MSG_ERROR_NOFILE +  fileName + Constants.SINGLE_QUOTE);
            
         }
-        //Obtener el conjunto de Reglas
+        //Get the set of rules
         FunctionBlock functionBlock = fis.getFunctionBlock(null);
   
-     // Entradas del Fuzzificador  
-       // JFuzzyChart.get().chart(functionBlock);
+        // Entradas del Fuzzificador  
+        JFuzzyChart.get().chart(functionBlock);
          System.out.println("\nFuzzy inputs: ");
          System.out.println("\n"+varname1+" | "+value1);
          System.out.println("\n"+varname2+" | "+value2);
          System.out.println("\n"+varname3+" | "+value3);
-     // Set inputs
+         
+        //Set inputs
         fis.setVariable(varname1, value1);
         fis.setVariable(varname2, value2);
         fis.setVariable(varname3, value3);
@@ -50,7 +57,7 @@ public class Fuzzification {
         fis.getVariable(Constants.V_SEVERITY).getLatestDefuzzifiedValue();
         
      // Grafico del fuzzificador
-     //  JFuzzyChart.get().chart(fis.getVariable(Constants.V_SEVERITY), fis.getVariable(Constants.V_SEVERITY).getDefuzzifier(), true);
+       JFuzzyChart.get().chart(fis.getVariable(Constants.V_SEVERITY), fis.getVariable(Constants.V_SEVERITY).getDefuzzifier(), true);
 
      
         double result =  fis.getVariable(Constants.V_SEVERITY).getLatestDefuzzifiedValue();

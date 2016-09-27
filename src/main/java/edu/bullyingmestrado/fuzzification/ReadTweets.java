@@ -8,9 +8,6 @@ package edu.bullyingmestrado.fuzzification;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.BeanToCsv;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
-import edu.bullyingmestrado.classification.Classification;
-import edu.bullyingmestrado.classification.Tokenizer;
-import edu.bullyingmestrado.classification.Tokens2FeatureVector;
 import edu.bullyingmestrado.commons.Constants;
 import edu.bullyingmestrado.entities.Tweet;
 import edu.bullyingmestrado.entities.TweetCSV;
@@ -20,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -31,15 +30,10 @@ public class ReadTweets {
 	 * Inicio do Severity Tool
 	 *
      * @param listTweets */
-    
+       private static final Logger logger = LogManager.getLogger(ReadTweets.class.getName());
+
         
        public static void writeCSVTweets(List<TweetCSV> listTweets){
-       /*@pamela-In Column CSV: (1)Original Tweet*/
-       /*@pamela-In Column CSV: (2) Is a Enriched Tweet?*/
-       /*@pamela-In Column CSV: (3) Is a BullyingTrace?*/
-        /*@pamela-In Column CSV: (4,5,6) */
-        /*@pamela-In Column CSV: (7) is valid for fuzzification*/
-         /*@pamela-In Column CSV: (8) Severity value*/
             String fileName = Constants.getCSVFilename();
             CSVWriter csvWriter = null;
 		try
@@ -49,38 +43,25 @@ public class ReadTweets {
                         BeanToCsv bc = new BeanToCsv();
                         //mapping of columns with their positions
                         ColumnPositionMappingStrategy mappingStrategy = new ColumnPositionMappingStrategy();
-                        //Set mappingStrategy type to Employee Type
+                        //Set mappingStrategy type to TweetCSV Type
                         mappingStrategy.setType(TweetCSV.class);
-            //Fields in Employee Bean
-            String[] columns = new String[]{"text","isEnriched","classBullyingTrace",
-"valueBullyingTrace","classTeasingTrace",
-"valueTeasingTrace","classFormBullying",
-"valueFormBullying","classAuthor",
-"valueAuthor", "isValidForFuzzification",
-"valueSeverity"};
-            
-            
-            
-            
-            
-            //Setting the colums for mappingStrategy
-            mappingStrategy.setColumnMapping(columns);
-            //Writing empList to csv file
-            bc.write(mappingStrategy,csvWriter,listTweets);
-            System.out.println("CSV File written successfully!!!");
+                        //Setting the colums for mappingStrategy
+                        mappingStrategy.setColumnMapping(Constants.CSV_TWEETS_FILE_HEADER);
+                        //Writing listTweets to csv file
+                        bc.write(mappingStrategy,csvWriter,listTweets);
+                        logger.info(Constants.MSG_INFO_CSVCREATED);
+                }
+                catch(Exception e){
                 
                 }
-                catch(Exception e){}
                 finally
 		{
 			try
 			{
-				//closing the writer
 				csvWriter.close();
 			}
 			catch(Exception ee)
 			{
-                            System.out.println("error.. flushh");
 				ee.printStackTrace();
 			}
 		}
@@ -108,7 +89,7 @@ public class ReadTweets {
                     
                   writeCSVTweets(listTweets);  
 		} catch (IOException e) {
-                    System.out.println("Nao se encontro arquivo");
+                    logger.error(Constants.MSG_ERROR_NOFILE);
 		}catch (Exception e) {
                     e.printStackTrace();
 		}

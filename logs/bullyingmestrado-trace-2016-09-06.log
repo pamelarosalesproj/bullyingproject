@@ -1,8 +1,0 @@
-[DEBUG] 2016-09-06 16:04:48.535 [main] LogDemo - Hello world - debug log
-[INFO ] 2016-09-06 16:04:48.538 [main] LogDemo - Hello world - info log
-[WARN ] 2016-09-06 16:04:48.538 [main] LogDemo - Hello world - warn log
-[ERROR] 2016-09-06 16:04:48.539 [main] LogDemo - Hello world - error log
-[DEBUG] 2016-09-06 16:05:19.217 [main] LogDemo - BULLYING MESTRADO - debug log
-[INFO ] 2016-09-06 16:05:19.219 [main] LogDemo - BULLYING MESTRADO - info log
-[WARN ] 2016-09-06 16:05:19.219 [main] LogDemo - BULLYING MESTRADO - warn log
-[ERROR] 2016-09-06 16:05:19.220 [main] LogDemo - BULLYING MESTRADO - error log

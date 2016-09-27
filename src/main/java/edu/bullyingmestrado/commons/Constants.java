@@ -5,7 +5,6 @@
  */
 package edu.bullyingmestrado.commons;
 
-import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -90,6 +89,7 @@ public final class Constants {
           public static final String PATH_TWEETS_INI = "/tweets/test.txt";
           public static final String PATH_MODELS = "/model/";
           public static final String PATH_FCL = "fcl/";
+          public static final String PATH_LONG_FCL = "src/main/resources/fcl/";
           public static final String PATH_VOCAB = "/model/vocab";
           
           /**
@@ -100,7 +100,10 @@ public final class Constants {
            public static final String MSG_WARN_ENRICH_MAX150 = "(Warning: line longer than 150 characters): ";   
            public static final String MSG_WARN_ENRICH_EXISTRT = "(Warning: line contains \"RT\", retweet?): ";
            public static final String MSG_ERROR_NOFILE = "ERROR - The file wasn't found : '";
-           
+           public static final String MSG_INFO_FILECREATED = "INFO - The file created is : '";
+           public static final String MSG_INFO_CSVCREATED= "INFO - CSV File written successfully";
+           public static final String MSG_ERROR_CSVFAIL= "ERROR - CSV File wasn't created or has errors";
+
            /**
             List of keywords used in Bullying context
             *
@@ -130,7 +133,37 @@ public final class Constants {
             Structure for *.csv files
             */
            public static final String CSV_REPORTTWEETS_FILE_HEADER ="Original Tweet |is a Enriched Tweet?|Bullying Trace?|Teasing Trace?|Bullying Form?|Author Role|Valid for Fuzzification?|Severity";
-
+           
+           public static String[] CSV_TWEETS_FILE_HEADER = { 
+                                            Constants.COLUMN_TWEET_TEXT,
+                                            Constants.COLUMN_TWEET_ISENRICHED,
+                                            Constants.COLUMN_TWEET_CLASSBULLYINGTRACE,
+                                            Constants.COLUMN_TWEET_VALUEBULLYINGTRACE,
+                                            Constants.COLUMN_TWEET_CLASSTEASINGTRACE,
+                                            Constants.COLUMN_TWEET_VALUETEASINGTRACE,
+                                            Constants.COLUMN_TWEET_CLASSFORMBULLYING,
+                                            Constants.COLUMN_TWEET_VALUEFORMBULLYING,
+                                            Constants.COLUMN_TWEET_CLASSAUTHOR,
+                                            Constants.COLUMN_TWEET_VALUEAUTHOR,
+                                            Constants.COLUMN_TWEET_ISVALIDFUZZIFICATION,
+                                            Constants.COLUMN_TWEET_VALUESEVERITY
+                                        };
+           
+           /*array of columns for CSV file*/
+           public static final String COLUMN_TWEET_TEXT = "text";
+           public static final String COLUMN_TWEET_ISENRICHED ="isEnriched";
+           public static final String COLUMN_TWEET_CLASSBULLYINGTRACE ="classBullyingTrace";
+           public static final String COLUMN_TWEET_VALUEBULLYINGTRACE ="valueBullyingTrace";
+           public static final String COLUMN_TWEET_CLASSTEASINGTRACE ="classTeasingTrace";
+           public static final String COLUMN_TWEET_VALUETEASINGTRACE ="valueTeasingTrace";
+           public static final String COLUMN_TWEET_CLASSFORMBULLYING ="classFormBullying";
+           public static final String COLUMN_TWEET_VALUEFORMBULLYING ="valueFormBullying";
+           public static final String COLUMN_TWEET_CLASSAUTHOR ="classAuthor";
+           public static final String COLUMN_TWEET_VALUEAUTHOR ="valueAuthor";
+           public static final String COLUMN_TWEET_ISVALIDFUZZIFICATION ="isValidForFuzzification";
+           public static final String COLUMN_TWEET_VALUESEVERITY ="valueSeverity";
+           
+          
            public static String getCSVFilename(){
                 Date dNow = new Date( );
                 SimpleDateFormat ft = 
