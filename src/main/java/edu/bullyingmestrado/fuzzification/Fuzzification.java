@@ -22,7 +22,7 @@ public class Fuzzification {
     
     }
      
-    public double getFuzzy(String varname1, String varname2, String varname3, 
+    public double getFuzzy(boolean printAvailable, String varname1, String varname2, String varname3, 
                             double value1, double value2, double value3){
         
     	String fileName = Constants.PATH_LONG_FCL +varname1+ Constants.UNDERLINE + varname2+ Constants.EXT_FCL;
@@ -39,7 +39,6 @@ public class Fuzzification {
         FunctionBlock functionBlock = fis.getFunctionBlock(null);
   
         // Entradas del Fuzzificador  
-        JFuzzyChart.get().chart(functionBlock);
          System.out.println("\nFuzzy inputs: ");
          System.out.println("\n"+varname1+" | "+value1);
          System.out.println("\n"+varname2+" | "+value2);
@@ -50,17 +49,18 @@ public class Fuzzification {
         fis.setVariable(varname2, value2);
         fis.setVariable(varname3, value3);
 
-     // Evaluate
+        //Evaluate
         fis.evaluate();
         
-     // Salida del Fuzzificador: Severity
+        //Salida del Fuzzificador: Severity
         fis.getVariable(Constants.V_SEVERITY).getLatestDefuzzifiedValue();
-        
-     // Grafico del fuzzificador
-       JFuzzyChart.get().chart(fis.getVariable(Constants.V_SEVERITY), fis.getVariable(Constants.V_SEVERITY).getDefuzzifier(), true);
-
-     
+              
         double result =  fis.getVariable(Constants.V_SEVERITY).getLatestDefuzzifiedValue();
+        
+        if (printAvailable){
+             JFuzzyChart.get().chart(functionBlock);
+             JFuzzyChart.get().chart(fis.getVariable(Constants.V_SEVERITY), fis.getVariable(Constants.V_SEVERITY).getDefuzzifier(), true);
+        }
         return result;
      }
     

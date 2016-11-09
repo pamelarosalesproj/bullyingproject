@@ -48,6 +48,16 @@ public class Tokens2FeatureVector {
 			e.printStackTrace();
 		}
 	}
+        
+        public String getWordUsingIndex(int i){
+            String word=null;
+            for (String key : this.vocab.keySet()) {
+                if (this.vocab.get(key).equals(i)) {
+                  return key;
+                }
+            }
+            return word;
+        }
 	
 	public void covertFeatureVector(ArrayList<String> tokens){
 		this.fv = new FeatureVector(vocab.size());
@@ -62,12 +72,10 @@ public class Tokens2FeatureVector {
 				fv.increase(idx);
 		}
 		this.fv.normalize();
-                System.out.println("imprime vector normalizado");
 	   System.out.println(fv.toString());	
 	}
 	
 	public Integer[] getIndexSet(){
-            System.out.println("fv es: "+ fv);
 		return fv.getIndexSet();
 	}
 	

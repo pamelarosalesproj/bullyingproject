@@ -65,7 +65,7 @@ public class MessagesWordpress extends javax.swing.JFrame {
 
     for(Object o : resultList) {
         WpUsers user = (WpUsers)o;
-        Vector<Object> oneRow = new Vector<Object>();
+        Vector<Object> oneRow = new Vector<>();
         oneRow.add(user.getId());
         oneRow.add(user.getDisplayName());
         oneRow.add(user.getUserLogin());

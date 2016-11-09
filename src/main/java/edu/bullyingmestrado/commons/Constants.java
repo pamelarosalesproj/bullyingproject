@@ -137,6 +137,8 @@ public final class Constants {
            public static String[] CSV_TWEETS_FILE_HEADER = { 
                                             Constants.COLUMN_TWEET_TEXT,
                                             Constants.COLUMN_TWEET_ISENRICHED,
+                                            Constants.COLUMN_TWEET_TEXTTOKENS,
+                                            Constants.COLUMN_TWEET_TEXTUNIGRAMBIGRAM,
                                             Constants.COLUMN_TWEET_CLASSBULLYINGTRACE,
                                             Constants.COLUMN_TWEET_VALUEBULLYINGTRACE,
                                             Constants.COLUMN_TWEET_CLASSTEASINGTRACE,
@@ -152,6 +154,8 @@ public final class Constants {
            /*array of columns for CSV file*/
            public static final String COLUMN_TWEET_TEXT = "text";
            public static final String COLUMN_TWEET_ISENRICHED ="isEnriched";
+           public static final String COLUMN_TWEET_TEXTTOKENS ="textTokens";
+           public static final String COLUMN_TWEET_TEXTUNIGRAMBIGRAM = "vectorUnigramBigram";
            public static final String COLUMN_TWEET_CLASSBULLYINGTRACE ="classBullyingTrace";
            public static final String COLUMN_TWEET_VALUEBULLYINGTRACE ="valueBullyingTrace";
            public static final String COLUMN_TWEET_CLASSTEASINGTRACE ="classTeasingTrace";

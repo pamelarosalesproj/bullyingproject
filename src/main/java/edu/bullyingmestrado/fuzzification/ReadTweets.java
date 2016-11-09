@@ -31,7 +31,7 @@ public class ReadTweets {
 	 *
      * @param listTweets */
        private static final Logger logger = LogManager.getLogger(ReadTweets.class.getName());
-
+       
         
        public static void writeCSVTweets(List<TweetCSV> listTweets){
             String fileName = Constants.getCSVFilename();

@@ -13,6 +13,9 @@ public class TweetCSV {
     public String text;
     public boolean isEnriched;
     
+    public String textTokens;
+    public String vectorUnigramBigram;
+
     public String classBullyingTrace;
     public double valueBullyingTrace;
     
@@ -53,6 +56,14 @@ public class TweetCSV {
 
     public void setText(String text) {
         this.text = text;
+    }
+    
+    public String getVectorUnigramBigram() {
+        return vectorUnigramBigram;
+    }
+
+    public void setVectorUnigramBigram(String vectorUnigramBigram) {
+        this.vectorUnigramBigram = vectorUnigramBigram;
     }
 
     public boolean isIsEnriched() {
@@ -142,6 +153,16 @@ public class TweetCSV {
     public void setValueSeverity(double valueSeverity) {
         this.valueSeverity = valueSeverity;
     }
+    
+
+    public String getTextTokens() {
+        return textTokens;
+    }
+
+    public void setTextTokens(String textTokens) {
+        this.textTokens = textTokens;
+    }
+
 
     
 }

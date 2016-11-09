@@ -12,9 +12,11 @@ import edu.bullyingmestrado.classification.Tokens2FeatureVector;
 import edu.bullyingmestrado.commons.Constants;
 import edu.bullyingmestrado.fuzzification.Fuzzification;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -24,6 +26,11 @@ public class Tweet {
         private String text;
         private boolean isTextEnriched;
         private ArrayList<String> tokens;
+        private String tokensOneText;
+        
+        private HashMap<String,Double> textUnigramBigram;
+        private String textUnigramBigramOneText;
+        
         private FeatureVector fv;
         Map<String, Classification> mapClassifiers;
         private boolean validForFuzzified;
@@ -60,6 +67,7 @@ public class Tweet {
         
         public Tweet(){
             mapClassifiers = new HashMap<>();
+            textUnigramBigram = new HashMap<>();
             this.validForFuzzified = false;
             this.isTextEnriched=false;
         }
@@ -67,6 +75,8 @@ public class Tweet {
         public Tweet(String text){
             this.text = text;
             mapClassifiers = new HashMap<>();
+            textUnigramBigram = new HashMap<>();
+
             this.validForFuzzified = false;
              this.isTextEnriched=false;
         }
@@ -106,6 +116,7 @@ public class Tweet {
         public void fuzzificationProcess(){
            Fuzzification fuzzy = new Fuzzification();
            this.valueSeverity = fuzzy.getFuzzy(
+                                    false, /*indicates if chart is displayed or not*/
                                     this.mapClassifiers.get(Constants.CLA_AUTHOR_ROLE).getClassResult(), 
                                     this.mapClassifiers.get(Constants.CLA_FORM).getClassResult(),
                                     this.mapClassifiers.get(Constants.CLA_TEASING).getClassifierName(),
@@ -137,6 +148,9 @@ public class Tweet {
             TweetCSV tweetCSV = new TweetCSV();
             tweetCSV.setText(this.text);
             tweetCSV.setIsEnriched(this.isTextEnriched);
+            tweetCSV.setTextTokens(this.tokensOneText);
+            tweetCSV.setVectorUnigramBigram(textUnigramBigramOneText);
+            
             for(String key : this.mapClassifiers.keySet()){
                     Classification classifier = this.mapClassifiers.get(key);
                     
@@ -167,6 +181,32 @@ public class Tweet {
             return tweetCSV;
         }
         
+        public void createHashMapUnigramBigram(Tokens2FeatureVector t2v){
+            Integer[] indexSet = this.fv.getIndexSet();
+            
+            for (Integer index : indexSet) {
+                String word = t2v.getWordUsingIndex(index);
+                double valueWord = fv.getValueOfWordIndex(index);
+                this.textUnigramBigram.put(word, valueWord);
+            }
+
+        }
+        
+        public void createVectorUnigramBigram() {
+		StringBuffer output = new StringBuffer();
+                DecimalFormat df2 = new DecimalFormat(".####");
+
+                output.append("[" );
+                for(Entry<String, Double> entry : this.textUnigramBigram.entrySet())
+                {   //print keys and values
+                    output.append("(" + entry.getKey() + ":" + df2.format(entry.getValue()) + ")\t");
+                }
+                output.append("]" );
+                
+		this.textUnigramBigramOneText = output.toString();
+	}
+        
+        
         public void process() throws IOException{
             /*@pamela --> Don't process line that don't fulfill the requirements of Enrichment*/
                         if (!Classification.checkInput(this.text) ){
@@ -179,8 +219,13 @@ public class Tweet {
                         Tokens2FeatureVector t2v = new Tokens2FeatureVector();
                         t2v.loadVocab(Constants.PATH_VOCAB);
                         this.tokens = tokenizer.tokenize(this.text);
+                        this.tokensOneText = String.join(Constants.SPACE, this.tokens);
                         t2v.covertFeatureVector(tokens);
                         this.setFv(t2v.getFv());
+                        
+                        
+                        this.createHashMapUnigramBigram(t2v);
+                        this.createVectorUnigramBigram();
                         
                         /*@pamela --> Use the 1st classifier 'Bullying Trace Classifier' that is a filter*/              
                         Classification clasifBullyingTrace = new Classification(Constants.CLA_TRACE);
@@ -208,5 +253,7 @@ public class Tweet {
                 
                         }
         }
-
+        
+        
+        
 }

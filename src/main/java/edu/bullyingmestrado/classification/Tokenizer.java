@@ -30,6 +30,9 @@ public class Tokenizer {
 			text = text.toLowerCase();
 		if (anonmymize){
 			text = text.replaceAll("http\\:\\/\\/[\\S]*\\b", "HTTPLINK");
+                        /*@pamela --> To include httpS, without it, text converted to vector isn't correct*/
+                        text = text.replaceAll("https\\:\\/\\/[\\S]*\\b", "HTTPLINK");
+
 			text = text.replaceAll("\\@\\w+", "@USER");
 		}
 		// deal with negation

@@ -1,0 +1,6 @@
+[INFO ] 2016-10-07 16:33:59.992 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_cyberbullying.fcl'
+[INFO ] 2016-10-07 16:34:01.582 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_physical.fcl'
+[INFO ] 2016-10-07 16:34:09.634 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_cyberbullying.fcl'
+[INFO ] 2016-10-07 16:34:09.927 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_cyberbullying.fcl'
+[INFO ] 2016-10-07 16:34:13.951 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_verbal.fcl'
+[INFO ] 2016-10-07 16:34:15.297 [main] ReadTweets - INFO - CSV File written successfully

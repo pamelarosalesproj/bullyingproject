@@ -20,6 +20,11 @@ public class FeatureVector {
 		index = new HashSet<>();
 		values = new double[size];
 	}
+        
+        public double getValueOfWordIndex(int i){
+            return this.values[i];
+            
+        }
 	
 	public void increase(Integer i){
 		index.add(i);
