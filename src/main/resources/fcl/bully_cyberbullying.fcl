@@ -1,5 +1,4 @@
-// Block definition (there may be more than one block per file)
-FUNCTION_BLOCK tipper
+FUNCTION_BLOCK bully_cyberbullying
 
 // Define input variables 
 //Then input and output variable/s are defined (variable type is only REAL, integer is not implemented yet)
@@ -8,7 +7,7 @@ VAR_INPUT
 	cyberbullying : REAL;
 	bully : REAL;
 	teasing : REAL;
-	
+	 
 END_VAR
 
 // Define output variable
@@ -38,26 +37,16 @@ FUZZIFY teasing
 	TERM Yes := trape 0 0.5 2.76 4.44;
 END_FUZZIFY
 
-
-FUZZIFY Severity
-  TERM Low := trian -0.4 0 0.4;
-  TERM Medium := trian 0.3 0.5 0.7;
-  TERM High := trian 0.6 1 1.4;
-END_FUZZIFY
-
-
-
-
-// Defzzzify output variable 'tip'
+// @pamela -->Defuzzzify output variable 'severity'
 //Output variables are defuzzified to get a 'real' output number, 
 //this is defined in DEFUZZIFY block. Like FUZZIFY block, 
 //linguistic terms (or TERMs) are defined:
 DEFUZZIFY Severity
-    TERM Low := (0,0) (2.5,1) (2.5,1)(13,0);
-    TERM Medium := (11,0) (14,1) (18,0);
-    TERM High := (15,0) (20,1) (25,1) (30,0);
+    TERM Moderate   := trape 1 2 3 4;
+    TERM Major      := trape 3 4 6 7;
+    TERM Severe     := trape 6 7 8 9;
     // Use 'Center Of Gravity' defuzzification method
-    METHOD : RM;
+    METHOD : COG;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0;
 END_DEFUZZIFY
@@ -70,26 +59,24 @@ RULEBLOCK No1
     ACT : MIN;
     // Use 'max' accumulation method
     ACCU : MAX;
-
-      
-RULE 73 : IF cyberbullying IS Low AND bully IS Low AND teasing IS No THEN Severity IS Low;                
-RULE 74 : IF cyberbullying IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Low;               
-RULE 75 : IF cyberbullying IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Medium;          
-RULE 76 : IF cyberbullying IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Low;            
-RULE 77 : IF cyberbullying IS Low AND bully IS High AND teasing IS No THEN Severity IS Medium;            
-RULE 78 : IF cyberbullying IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Low;              
-RULE 79 : IF cyberbullying IS Medium AND bully IS Low AND teasing IS No THEN Severity IS Medium;          
-RULE 80 : IF cyberbullying IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Low;            
-RULE 81 : IF cyberbullying IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS High;         
-RULE 82 : IF cyberbullying IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Medium;      
-RULE 83 : IF cyberbullying IS Medium AND bully IS High AND teasing IS No THEN Severity IS High;           
-RULE 84 : IF cyberbullying IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Medium;        
-RULE 85 : IF cyberbullying IS High AND bully IS Low AND teasing IS No THEN Severity IS High;              
-RULE 86 : IF cyberbullying IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Medium;           
-RULE 87 : IF cyberbullying IS High AND bully IS Medium AND teasing IS No THEN Severity IS High;           
-RULE 88 : IF cyberbullying IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Medium;        
-RULE 89 : IF cyberbullying IS High AND bully IS High AND teasing IS No THEN Severity IS High;             
-RULE 90 : IF cyberbullying IS High AND bully IS High AND teasing IS Yes THEN Severity IS Medium;          
+RULE  1 : IF cyberbullying IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  2 : IF cyberbullying IS Low AND bully IS Low AND teasing IS No THEN Severity IS Moderate;
+RULE  3 : IF cyberbullying IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+RULE  4 : IF cyberbullying IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Major;
+RULE  5 : IF cyberbullying IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Moderate;
+RULE  6 : IF cyberbullying IS Low AND bully IS High AND teasing IS No THEN Severity IS Major;
+RULE  7 : IF cyberbullying IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  8 : IF cyberbullying IS Medium AND bully IS Low AND teasing IS No THEN Severity IS Severe;
+RULE  9 : IF cyberbullying IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Major;
+RULE  10 : IF cyberbullying IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS Severe;
+RULE  11 : IF cyberbullying IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+RULE  12 : IF cyberbullying IS Medium AND bully IS High AND teasing IS No THEN Severity IS Severe;
+RULE  13 : IF cyberbullying IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Major;
+RULE  14 : IF cyberbullying IS High AND bully IS Low AND teasing IS No THEN Severity IS Severe;
+RULE  15 : IF cyberbullying IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Major;
+RULE  16 : IF cyberbullying IS High AND bully IS Medium AND teasing IS No THEN Severity IS Severe;
+RULE  17 : IF cyberbullying IS High AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+RULE  18 : IF cyberbullying IS High AND bully IS High AND teasing IS No THEN Severity IS Severe;
 
 END_RULEBLOCK
 

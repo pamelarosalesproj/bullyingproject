@@ -116,7 +116,7 @@ public class Tweet {
         public void fuzzificationProcess(){
            Fuzzification fuzzy = new Fuzzification();
            this.valueSeverity = fuzzy.getFuzzy(
-                                    false, /*indicates if chart is displayed or not*/
+                                    false, /*@pamela--> indicates if chart is displayed or not*/
                                     this.mapClassifiers.get(Constants.CLA_AUTHOR_ROLE).getClassResult(), 
                                     this.mapClassifiers.get(Constants.CLA_FORM).getClassResult(),
                                     this.mapClassifiers.get(Constants.CLA_TEASING).getClassifierName(),
@@ -132,8 +132,7 @@ public class Tweet {
                 if (classifier.getClassResult().equals(Constants.CLA_AUTH_ACCUSER) ||
                     classifier.getClassResult().equals(Constants.CLA_AUTH_DEFENDER) ||
                     classifier.getClassResult().equals(Constants.CLA_AUTH_REPORTER) ||
-                    classifier.getClassResult().equals(Constants.CLA_AUTH_OTHER) ||
-                    classifier.getClassResult().equals(Constants.CLA_FORM_GENERAL) 
+                    classifier.getClassResult().equals(Constants.CLA_AUTH_OTHER) 
                     ){
                     this.validForFuzzified = false;
                     return this.validForFuzzified;

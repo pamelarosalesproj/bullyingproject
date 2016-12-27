@@ -1,4 +1,4 @@
-/*
+    /*
 Load classification model and use it to classify the input.
 
 Input: each line from stdin is treated as a short document.  It is expected that the input

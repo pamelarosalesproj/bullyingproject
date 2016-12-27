@@ -1,5 +1,5 @@
 // Block definition (there may be more than one block per file)
-FUNCTION_BLOCK tipper
+FUNCTION_BLOCK bully_physical
 
 // Define input variables 
 //Then input and output variable/s are defined (variable type is only REAL, integer is not implemented yet)
@@ -35,29 +35,20 @@ END_FUZZIFY
 
 FUZZIFY teasing
     TERM No := trape -4.59 -2.91 -0.5 0;
-	TERM Yes := trape 0 0.5 2.76 4.44;
+    TERM Yes := trape 0 0.5 2.76 4.44;
 END_FUZZIFY
 
 
-FUZZIFY Severity
-  TERM Low := trian -0.4 0 0.4;
-  TERM Medium := trian 0.3 0.5 0.7;
-  TERM High := trian 0.6 1 1.4;
-END_FUZZIFY
-
-
-
-
-// Defzzzify output variable 'tip'
+// @pamela -->Defuzzzify output variable 'severity'
 //Output variables are defuzzified to get a 'real' output number, 
 //this is defined in DEFUZZIFY block. Like FUZZIFY block, 
 //linguistic terms (or TERMs) are defined:
 DEFUZZIFY Severity
-    TERM Low := (0,0) (2.5,1) (2.5,1)(13,0);
-    TERM Medium := (11,0) (14,1) (18,0);
-    TERM High := (15,0) (20,1) (25,1) (30,0);
+    TERM Moderate   := trape 1 2 3 4;
+    TERM Major      := trape 3 4 6 7;
+    TERM Severe     := trape 6 7 8 9;
     // Use 'Center Of Gravity' defuzzification method
-    METHOD : RM;
+    METHOD : COG;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0;
 END_DEFUZZIFY
@@ -71,25 +62,24 @@ RULEBLOCK No1
     // Use 'max' accumulation method
     ACCU : MAX;
     
-RULE 19 : IF physical IS Low AND bully IS Low AND teasing IS No THEN Severity IS Medium;         
-RULE 20 : IF physical IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Low;       
-RULE 21 : IF physical IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Medium;      
-RULE 22 : IF physical IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Low;        
-RULE 23 : IF physical IS Low AND bully IS High AND teasing IS No THEN Severity IS Medium;        
-RULE 24 : IF physical IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Low;          
-RULE 25 : IF physical IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Medium;     
-RULE 26 : IF physical IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS High;     
-RULE 27 : IF physical IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Medium;  
-RULE 28 : IF physical IS Medium AND bully IS High AND teasing IS No THEN Severity IS High;       
-RULE 29 : IF physical IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Medium;    
-RULE 30 : IF physical IS Medium AND bully IS Low AND teasing IS No THEN Severity IS High;        
-RULE 31 : IF physical IS High AND bully IS Low AND teasing IS No THEN Severity IS High;          
-RULE 32 : IF physical IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Medium;       
-RULE 33 : IF physical IS High AND bully IS Medium AND teasing IS No THEN Severity IS High;       
-RULE 34 : IF physical IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Medium;    
-RULE 35 : IF physical IS High AND bully IS High AND teasing IS No THEN Severity IS High;         
-RULE 36 : IF physical IS High AND bully IS High AND teasing IS Yes THEN Severity IS Medium;      
-
+    RULE  1 : IF physical IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  2 : IF physical IS Low AND bully IS Low AND teasing IS No THEN Severity IS Major;
+    RULE  3 : IF physical IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  4 : IF physical IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Major;
+    RULE  5 : IF physical IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  6 : IF physical IS Low AND bully IS High AND teasing IS No THEN Severity IS Major;
+    RULE  7 : IF physical IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Major;
+    RULE  8 : IF physical IS Medium AND bully IS Low AND teasing IS No THEN Severity IS Severe;
+    RULE  9 : IF physical IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Major;
+    RULE  10 : IF physical IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS Severe;
+    RULE  11 : IF physical IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+    RULE  12 : IF physical IS Medium AND bully IS High AND teasing IS No THEN Severity IS Severe;
+    RULE  13 : IF physical IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Major;
+    RULE  14 : IF physical IS High AND bully IS Low AND teasing IS No THEN Severity IS Severe;
+    RULE  15 : IF physical IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Major;
+    RULE  16 : IF physical IS High AND bully IS Medium AND teasing IS No THEN Severity IS Severe;
+    RULE  17 : IF physical IS High AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+    RULE  18 : IF physical IS High AND bully IS High AND teasing IS No THEN Severity IS Severe;
 
 END_RULEBLOCK
 

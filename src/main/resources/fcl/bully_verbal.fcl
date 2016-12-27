@@ -1,5 +1,5 @@
 // Block definition (there may be more than one block per file)
-FUNCTION_BLOCK tipper
+FUNCTION_BLOCK bully_verbal
 
 // Define input variables 
 //Then input and output variable/s are defined (variable type is only REAL, integer is not implemented yet)
@@ -20,10 +20,6 @@ END_VAR
 //How each input variable is fuzzified is defined in FUZZIFY block. In each block 
 //we define one or more TERMs (also called LinguisticTerms). Each term is composed by a name and a membership function.
 
-
-
-
-
 FUZZIFY verbal
     TERM Low := trape -0.3427 -0.1021 0.08 0.11;
 	TERM Medium := trian 0.08 0.18 0.28;
@@ -42,28 +38,21 @@ FUZZIFY teasing
 END_FUZZIFY
 
 
-FUZZIFY Severity
-  TERM Low := trian -0.4 0 0.4;
-  TERM Medium := trian 0.3 0.5 0.7;
-  TERM High := trian 0.6 1 1.4;
-END_FUZZIFY
 
-
-
-
-// Defzzzify output variable 'tip'
+// @pamela -->Defuzzzify output variable 'severity'
 //Output variables are defuzzified to get a 'real' output number, 
 //this is defined in DEFUZZIFY block. Like FUZZIFY block, 
 //linguistic terms (or TERMs) are defined:
 DEFUZZIFY Severity
-    TERM Low := (0,0) (2.5,1) (2.5,1)(13,0);
-    TERM Medium := (11,0) (14,1) (18,0);
-    TERM High := (15,0) (20,1) (25,1) (30,0);
+    TERM Moderate   := trape 1 2 3 4;
+    TERM Major      := trape 3 4 6 7;
+    TERM Severe     := trape 6 7 8 9;
     // Use 'Center Of Gravity' defuzzification method
-    METHOD : RM;
+    METHOD : COG;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0;
 END_DEFUZZIFY
+
 
 RULEBLOCK No1
     // Use 'min' for 'and' (also implicit use 'max'
@@ -76,24 +65,27 @@ RULEBLOCK No1
 
 
 
-RULE 55 : IF verbal IS Low AND bully IS Low AND teasing IS No THEN Severity IS Low;              
-RULE 56 : IF verbal IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Low;             
-RULE 57 : IF verbal IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Low;           
-RULE 58 : IF verbal IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Low;          
-RULE 59 : IF verbal IS Low AND bully IS High AND teasing IS No THEN Severity IS Low;             
-RULE 60 : IF verbal IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Low;            
-RULE 61 : IF verbal IS Medium AND bully IS Low AND teasing IS No THEN Severity IS Medium;        
-RULE 62 : IF verbal IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Low;          
-RULE 63 : IF verbal IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS Medium;     
-RULE 64 : IF verbal IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Low;       
-RULE 65 : IF verbal IS Medium AND bully IS High AND teasing IS No THEN Severity IS Medium;            
-RULE 66 : IF verbal IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Low;         
-RULE 67 : IF verbal IS High AND bully IS Low AND teasing IS No THEN Severity IS Medium;          
-RULE 68 : IF verbal IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Low;            
-RULE 69 : IF verbal IS High AND bully IS Medium AND teasing IS No THEN Severity IS Medium;       
-RULE 70 : IF verbal IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Low;         
-RULE 71 : IF verbal IS High AND bully IS High AND teasing IS No THEN Severity IS High;           
-RULE 72 : IF verbal IS High AND bully IS High AND teasing IS Yes THEN Severity IS Medium;        
+
+
+RULE  1 : IF verbal IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  2 : IF verbal IS Low AND bully IS Low AND teasing IS No THEN Severity IS Moderate;
+RULE  3 : IF verbal IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+RULE  4 : IF verbal IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Moderate;
+RULE  5 : IF verbal IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Moderate;
+RULE  6 : IF verbal IS Low AND bully IS High AND teasing IS No THEN Severity IS Moderate;
+RULE  7 : IF verbal IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  8 : IF verbal IS Medium AND bully IS Low AND teasing IS No THEN Severity IS Major;
+RULE  9 : IF verbal IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+RULE  10 : IF verbal IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS Major;
+RULE  11 : IF verbal IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Moderate;
+RULE  12 : IF verbal IS Medium AND bully IS High AND teasing IS No THEN Severity IS Major;
+RULE  13 : IF verbal IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  14 : IF verbal IS High AND bully IS Low AND teasing IS No THEN Severity IS Major;
+RULE  15 : IF verbal IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+RULE  16 : IF verbal IS High AND bully IS Medium AND teasing IS No THEN Severity IS Major;
+RULE  17 : IF verbal IS High AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+RULE  18 : IF verbal IS High AND bully IS High AND teasing IS No THEN Severity IS Severe;
+   
 
 END_RULEBLOCK
 

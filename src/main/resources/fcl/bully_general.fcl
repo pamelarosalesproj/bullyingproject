@@ -1,12 +1,11 @@
 // @pamela --> Block definition (there may be more than one block per file)
-FUNCTION_BLOCK Bully_General
+FUNCTION_BLOCK bully_general
 
 // @pamela -->Define input variables 
 VAR_INPUT
-        general : REAL;
-	bully   : REAL;
-	teasing : REAL;
-	
+    general : REAL;
+    bully   : REAL;
+    teasing : REAL;
 END_VAR
 
 // @pamela -->Define output variable
@@ -15,45 +14,37 @@ VAR_OUTPUT
 END_VAR
 
 
-//@pamela --> How each input variable is fuzzified is defined in FUZZIFY block. In each block 
-
+//  @pamela --> How each input variable is fuzzified is defined in FUZZIFY block. In each block 
 FUZZIFY general
-    TERM Low := trape -0.3129 -0.1137 0.06053 0.1804;
-    TERM Medium := trian 0.1343 0.2265 0.3187;
-    TERM High := trape 0.2726 0.3833 0.6188 0.7521;
+    TERM Low := trape  -3 -2 -1 0;
+    TERM Medium := trape -1 -0.5 0.5 1;
+    TERM High := trape 0 1 2 3;
 END_FUZZIFY
 
+// @pamela --> range varies between -0.6 and 1.5
 FUZZIFY bully
     TERM Low := trape -1.12 -0.515 -0.308 -0.0048;
     TERM Medium := trian -0.32 0.35 0.949;
     TERM High := trian 0.4 0.875 1.44;
-END_FUZZIFY
+END_FUZZIFY 
 
+// @pamela --> range varies between -3 and 3
 FUZZIFY teasing
     TERM No := trape -4.59 -2.91 -0.5 0;
     TERM Yes := trape 0 0.5 2.76 4.44;
 END_FUZZIFY
 
 
-FUZZIFY Severity
-  TERM Low := trian -0.4 0 0.4;
-  TERM Medium := trian 0.3 0.5 0.7;
-  TERM High := trian 0.6 1 1.4;
-END_FUZZIFY
-
-
-
-
-// Defzzzify output variable 'severity'
+// @pamela -->Defuzzzify output variable 'severity'
 //Output variables are defuzzified to get a 'real' output number, 
 //this is defined in DEFUZZIFY block. Like FUZZIFY block, 
 //linguistic terms (or TERMs) are defined:
 DEFUZZIFY Severity
-    TERM Low := (0,0) (2.5,1) (2.5,1)(13,0);
-    TERM Medium := (11,0) (14,1) (18,0);
-    TERM High := (15,0) (20,1) (25,1) (30,0);
+    TERM Moderate   := trape 1 2 3 4;
+    TERM Major      := trape 3 4 6 7;
+    TERM Severe     := trape 6 7 8 9;
     // Use 'Center Of Gravity' defuzzification method
-    METHOD : RM;
+    METHOD : COG;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0;
 END_DEFUZZIFY
@@ -66,25 +57,27 @@ RULEBLOCK No1
     ACT : MIN;
     // Use 'max' accumulation method
     ACCU : MAX;
-    
-RULE 1 :    IF general IS Low AND bully IS Low AND teasing IS No THEN Severity IS Medium;         
-RULE 2 :    IF general IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Low;       
-RULE 3 :    IF general IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Medium;      
-RULE 4 :    IF general IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Low;        
-RULE 5 :    IF general IS Low AND bully IS High AND teasing IS No THEN Severity IS Medium;        
-RULE 6 :    IF general IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Low;          
-RULE 7 :    IF physical IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Medium;     
-RULE 8 :    IF physical IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS High;     
-RULE 9 :    IF physical IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Medium;  
-RULE 10 :   IF physical IS Medium AND bully IS High AND teasing IS No THEN Severity IS High;       
-RULE 11 :   IF physical IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Medium;    
-RULE 12 :   IF physical IS Medium AND bully IS Low AND teasing IS No THEN Severity IS High;        
-RULE 13 :   IF physical IS High AND bully IS Low AND teasing IS No THEN Severity IS High;          
-RULE 14 :   IF physical IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Medium;       
-RULE 15 :   IF physical IS High AND bully IS Medium AND teasing IS No THEN Severity IS High;       
-RULE 16 :   IF physical IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Medium;    
-RULE 17 :   IF physical IS High AND bully IS High AND teasing IS No THEN Severity IS High;         
-RULE 18 :   IF physical IS High AND bully IS High AND teasing IS Yes THEN Severity IS Medium;      
+    RULE  1 : IF general IS Low AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  2 : IF general IS Low AND bully IS Low AND teasing IS No THEN Severity IS Moderate;
+    RULE  3 : IF general IS Low AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  4 : IF general IS Low AND bully IS Medium AND teasing IS No THEN Severity IS Moderate;
+    RULE  5 : IF general IS Low AND bully IS High AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  6 : IF general IS Low AND bully IS High AND teasing IS No THEN Severity IS Moderate;
+    RULE  7 : IF general IS Medium AND bully IS Low AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  8 : IF general IS Medium AND bully IS Low AND teasing IS No THEN Severity IS Moderate;
+    RULE  9 : IF general IS Medium AND bully IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+    RULE  10 : IF general IS Medium AND bully IS Medium AND teasing IS No THEN Severity IS Major;
+    RULE  11 : IF general IS Medium AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+    RULE  12 : IF general IS Medium AND bully IS High AND teasing IS No THEN Severity IS Major;
+    RULE  13 : IF general IS High AND bully IS Low AND teasing IS Yes THEN Severity IS Major;
+    RULE  14 : IF general IS High AND bully IS Low AND teasing IS No THEN Severity IS Major;
+    RULE  15 : IF general IS High AND bully IS Medium AND teasing IS Yes THEN Severity IS Major;
+    RULE  16 : IF general IS High AND bully IS Medium AND teasing IS No THEN Severity IS Severe;
+    RULE  17 : IF general IS High AND bully IS High AND teasing IS Yes THEN Severity IS Major;
+    RULE  18 : IF general IS High AND bully IS High AND teasing IS No THEN Severity IS Severe;
+
+
+
 
 
 END_RULEBLOCK

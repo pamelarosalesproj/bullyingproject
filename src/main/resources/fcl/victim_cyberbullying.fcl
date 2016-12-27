@@ -1,13 +1,13 @@
-// Block definition (there may be more than one block per file)
-FUNCTION_BLOCK tipper
+FUNCTION_BLOCK victim_cyberbullying
 
 // Define input variables 
 //Then input and output variable/s are defined (variable type is only REAL, integer is not implemented yet)
 VAR_INPUT
- 	cyberbullying : REAL;
+    
+	cyberbullying : REAL;
 	victim : REAL;
 	teasing : REAL;
-	
+	 
 END_VAR
 
 // Define output variable
@@ -19,20 +19,17 @@ END_VAR
 //How each input variable is fuzzified is defined in FUZZIFY block. In each block 
 //we define one or more TERMs (also called LinguisticTerms). Each term is composed by a name and a membership function.
 
-
-
-
-
 FUZZIFY cyberbullying
-    TERM Low := trian -0.726 -0.096 0.29;
+        TERM Low := trian -0.726 -0.096 0.29;
 	TERM Medium := trian -0.03 0.43 0.93;
 	TERM High := trape 0.519 1 1.54 2.05;
 END_FUZZIFY
 
+
 FUZZIFY victim
-    TERM Low := trape -1.34 -0.723 -0.56 0.5;
-	TERM Medium := trian -0.55 0.41 1.41;
-	TERM High := trape 0.5 1.65 1.95 2.71;
+  TERM Low := trape -1.12 -0.515 -0.308 -0.0048;
+  TERM Medium := trian -0.32 0.35 0.949;
+  TERM High := trian 0.4 0.875 1.44;
 END_FUZZIFY
 
 FUZZIFY teasing
@@ -40,26 +37,16 @@ FUZZIFY teasing
 	TERM Yes := trape 0 0.5 2.76 4.44;
 END_FUZZIFY
 
-
-FUZZIFY Severity
-  TERM Low := trian -0.4 0 0.4;
-  TERM Medium := trian 0.3 0.5 0.7;
-  TERM High := trian 0.6 1 1.4;
-END_FUZZIFY
-
-
-
-
-// Defzzzify output variable 'tip'
+// @pamela -->Defuzzzify output variable 'severity'
 //Output variables are defuzzified to get a 'real' output number, 
 //this is defined in DEFUZZIFY block. Like FUZZIFY block, 
 //linguistic terms (or TERMs) are defined:
 DEFUZZIFY Severity
-    TERM Low := (0,0) (2.5,1) (2.5,1)(13,0);
-    TERM Medium := (11,0) (14,1) (18,0);
-    TERM High := (15,0) (20,1) (25,1) (30,0);
+    TERM Moderate   := trape 1 2 3 4;
+    TERM Major      := trape 3 4 6 7;
+    TERM Severe     := trape 6 7 8 9;
     // Use 'Center Of Gravity' defuzzification method
-    METHOD : RM;
+    METHOD : COG;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0;
 END_DEFUZZIFY
@@ -72,32 +59,28 @@ RULEBLOCK No1
     ACT : MIN;
     // Use 'max' accumulation method
     ACCU : MAX;
-
-        
-RULE 91 : IF cyberbullying IS Low AND victim IS Low AND teasing IS No THEN Severity IS Low;               
-RULE 92 : IF cyberbullying IS Low AND victim IS Low AND teasing IS Yes THEN Severity IS Low;              
-RULE 93 : IF cyberbullying IS Low AND victim IS Medium AND teasing IS No THEN Severity IS Medium;         
-RULE 94 : IF cyberbullying IS Low AND victim IS Medium AND teasing IS Yes THEN Severity IS Low;           
-RULE 95 : IF cyberbullying IS Low AND victim IS High AND teasing IS No THEN Severity IS Medium;           
-RULE 96 : IF cyberbullying IS Low AND victim IS High AND teasing IS Yes THEN Severity IS Low;             
-RULE 97 : IF cyberbullying IS Medium AND victim IS Low AND teasing IS No THEN Severity IS Medium;         
-RULE 98 : IF cyberbullying IS Medium AND victim IS Low AND teasing IS Yes THEN Severity IS Low;           
-RULE 99 : IF cyberbullying IS Medium AND victim IS Medium AND teasing IS No THEN Severity IS High;        
-RULE 100 : IF cyberbullying IS Medium AND victim IS Medium AND teasing IS Yes THEN Severity IS Medium;    
-RULE 101 : IF cyberbullying IS Medium AND victim IS High AND teasing IS No THEN Severity IS High;         
-RULE 102 : IF cyberbullying IS Medium AND victim IS High AND teasing IS Yes THEN Severity IS Medium;      
-RULE 103 : IF cyberbullying IS High AND victim IS Low AND teasing IS No THEN Severity IS High;            
-RULE 104 : IF cyberbullying IS High AND victim IS Low AND teasing IS Yes THEN Severity IS Medium;         
-RULE 105 : IF cyberbullying IS High AND victim IS Medium AND teasing IS No THEN Severity IS High;        
-RULE 106 : IF cyberbullying IS High AND victim IS Medium AND teasing IS Yes THEN Severity IS Medium;     
-RULE 107 : IF cyberbullying IS High AND victim IS High AND teasing IS No THEN Severity IS High;           
-RULE 108 : IF cyberbullying IS High AND victim IS High AND teasing IS Yes THEN Severity IS Medium;
+RULE  1 : IF cyberbullying IS Low AND victim IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  2 : IF cyberbullying IS Low AND victim IS Low AND teasing IS No THEN Severity IS Moderate;
+RULE  3 : IF cyberbullying IS Low AND victim IS Medium AND teasing IS Yes THEN Severity IS Moderate;
+RULE  4 : IF cyberbullying IS Low AND victim IS Medium AND teasing IS No THEN Severity IS Major;
+RULE  5 : IF cyberbullying IS Low AND victim IS High AND teasing IS Yes THEN Severity IS Moderate;
+RULE  6 : IF cyberbullying IS Low AND victim IS High AND teasing IS No THEN Severity IS Major;
+RULE  7 : IF cyberbullying IS Medium AND victim IS Low AND teasing IS Yes THEN Severity IS Moderate;
+RULE  8 : IF cyberbullying IS Medium AND victim IS Low AND teasing IS No THEN Severity IS Severe;
+RULE  9 : IF cyberbullying IS Medium AND victim IS Medium AND teasing IS Yes THEN Severity IS Major;
+RULE  10 : IF cyberbullying IS Medium AND victim IS Medium AND teasing IS No THEN Severity IS Severe;
+RULE  11 : IF cyberbullying IS Medium AND victim IS High AND teasing IS Yes THEN Severity IS Major;
+RULE  12 : IF cyberbullying IS Medium AND victim IS High AND teasing IS No THEN Severity IS Severe;
+RULE  13 : IF cyberbullying IS High AND victim IS Low AND teasing IS Yes THEN Severity IS Major;
+RULE  14 : IF cyberbullying IS High AND victim IS Low AND teasing IS No THEN Severity IS Severe;
+RULE  15 : IF cyberbullying IS High AND victim IS Medium AND teasing IS Yes THEN Severity IS Major;
+RULE  16 : IF cyberbullying IS High AND victim IS Medium AND teasing IS No THEN Severity IS Severe;
+RULE  17 : IF cyberbullying IS High AND victim IS High AND teasing IS Yes THEN Severity IS Major;
+RULE  18 : IF cyberbullying IS High AND victim IS High AND teasing IS No THEN Severity IS Severe;
 
 END_RULEBLOCK
 
 
 END_FUNCTION_BLOCK
 
-OPTION
-  physical
-END_OPTION
+
