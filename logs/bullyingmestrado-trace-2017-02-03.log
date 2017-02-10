@@ -1,0 +1,20 @@
+[INFO ] 2017-02-03 09:32:59.330 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 09:33:55.352 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 09:34:12.568 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 09:49:21.701 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 10:05:40.119 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 10:06:47.124 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 10:07:24.877 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_general.fcl'
+[INFO ] 2017-02-03 10:07:27.119 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 10:08:01.986 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 14:39:23.234 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 14:39:43.274 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_general.fcl'
+[INFO ] 2017-02-03 14:39:48.460 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 14:41:36.155 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 14:42:13.051 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 15:43:54.084 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 15:44:25.869 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 16:26:21.162 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_general.fcl'
+[INFO ] 2017-02-03 16:26:23.405 [main] ReadTweets - INFO - CSV File written successfully
+[INFO ] 2017-02-03 16:27:05.125 [main] Fuzzification - INFO - The file created is : 'src/main/resources/fcl/victim_general.fcl'
+[INFO ] 2017-02-03 16:27:07.432 [main] ReadTweets - INFO - CSV File written successfully

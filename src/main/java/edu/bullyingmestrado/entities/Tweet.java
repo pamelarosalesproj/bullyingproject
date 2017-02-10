@@ -23,6 +23,17 @@ import java.util.Map.Entry;
  * @author pamela
  */
 public class Tweet {
+
+
+    /*@pamela --> Aditional information about user*/
+    public void setSecondaryTextId(Long secondaryTextId) {
+        this.secondaryTextId = secondaryTextId;
+    }
+
+        private String userId;
+        private String textId;
+        private Long secondaryTextId;
+    
         private String text;
         private boolean isTextEnriched;
         private ArrayList<String> tokens;
@@ -36,7 +47,70 @@ public class Tweet {
         private boolean validForFuzzified;
         
         private double valueSeverity;
+        private boolean displayChartFuzzy;
 
+    public boolean isDisplayChartFuzzy() {
+        return displayChartFuzzy;
+    }
+
+    public void setDisplayChartFuzzy(boolean displayChartFuzzy) {
+        this.displayChartFuzzy = displayChartFuzzy;
+    }
+
+    public String getAuthorRoleClassResult(){
+        String autor = "";
+        try{
+            autor = this.mapClassifiers.get(Constants.CLA_AUTHOR_ROLE).getClassResult() ;
+        }
+        catch(NullPointerException e){
+            return "";
+        }
+        
+        return autor;
+        
+    }
+    
+    public String getFormBullyingClassResult(){
+        String formBullying = "";
+        try{
+            formBullying =  this.mapClassifiers.get(Constants.CLA_FORM).getClassResult() ;
+        }
+        catch(NullPointerException e){
+            return "";
+        }
+        
+        return formBullying;
+    }
+    
+    public String getTeasingTraceClassResult(){
+        String teasingTrace = "";
+        try{
+            teasingTrace = this.mapClassifiers.get(Constants.CLA_TEASING).getClassResult() ;
+             }
+        catch(NullPointerException e){
+            return "";
+        }
+        
+        return teasingTrace;
+    }
+    
+    public String getBullyingTraceClassResult(){
+        
+        String bullyingTrace = "";
+        try{
+            bullyingTrace = this.mapClassifiers.get(Constants.CLA_TRACE).getClassResult() ;
+             }
+        catch(NullPointerException e){
+            return "";
+        }
+        
+        return bullyingTrace;
+    }
+    
+
+   
+        
+        
     public boolean getIsTextEnriched() {
         return isTextEnriched;
     }
@@ -70,6 +144,7 @@ public class Tweet {
             textUnigramBigram = new HashMap<>();
             this.validForFuzzified = false;
             this.isTextEnriched=false;
+            this.displayChartFuzzy=false;
         }
         
         public Tweet(String text){
@@ -79,6 +154,7 @@ public class Tweet {
 
             this.validForFuzzified = false;
              this.isTextEnriched=false;
+             this.displayChartFuzzy=false;
         }
         
         public Tweet(String text, boolean validForFuzzified ){
@@ -116,7 +192,7 @@ public class Tweet {
         public void fuzzificationProcess(){
            Fuzzification fuzzy = new Fuzzification();
            this.valueSeverity = fuzzy.getFuzzy(
-                                    false, /*@pamela--> indicates if chart is displayed or not*/
+                                    this.displayChartFuzzy, /*@pamela--> indicates if chart is displayed or not*/
                                     this.mapClassifiers.get(Constants.CLA_AUTHOR_ROLE).getClassResult(), 
                                     this.mapClassifiers.get(Constants.CLA_FORM).getClassResult(),
                                     this.mapClassifiers.get(Constants.CLA_TEASING).getClassifierName(),
@@ -253,6 +329,25 @@ public class Tweet {
                         }
         }
         
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getTextId() {
+        return textId;
+    }
+
+    public void setTextId(String textId) {
+        this.textId = textId;
+    }
+
+    public Long getSecondaryTextId() {
+        return secondaryTextId;
+    }
         
         
 }

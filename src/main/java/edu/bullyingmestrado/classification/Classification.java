@@ -135,10 +135,13 @@ public class Classification implements Comparable<Classification>{
 			System.err.println("(Warning: line does not contain string \"bull\"): " + text);
 			return false;
 		}
-		if (text.contains("RT")) {
+		/*
+                @pamela This part was ommited since any text won't contain RT..
+                
+                if (text.contains("RT")) {
 			System.err.println("(Warning: line contains \"RT\", retweet?): " + text);
 			return false;
-		}
+		}*/
 		return true;
 	}
 

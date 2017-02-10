@@ -4,18 +4,58 @@
  * and open the template in the editor.
  */
 package edu.bullyingmestrado.swing;
+import edu.bullyingmestrado.commons.Constants;
+import edu.bullyingmestrado.dao.HibernateUtil;
+import edu.bullyingmestrado.dao.WpBpActivity;
+import edu.bullyingmestrado.entities.MessagesUser;
+import edu.bullyingmestrado.entities.Tweet;
+import edu.bullyingmestrado.entities.TweetCSV;
+import edu.bullyingmestrado.fuzzification.ReadTweets;
+import static edu.bullyingmestrado.fuzzification.ReadTweets.writeCSVTweets;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
  * @author pamela
  */
 public class EvaluationTextsFrame extends javax.swing.JFrame {
-
+ private static final Logger logger = LogManager.getLogger(ReadTweets.class.getName());
+       
     /**
      * Creates new form EvaluationTextsFrame
      */
+    
+    /*
+    List of Tweets
+    */
+    List listTweets;
     public EvaluationTextsFrame() {
+        
+        
         initComponents();
+        //setLayout(new FlowLayout());
+        UtilDateModel model = new UtilDateModel();
+        JDatePanelImpl datePanel = new JDatePanelImpl(model);
+        datePicker = new JDatePickerImpl(datePanel);
+        //this.jPanel1.add(datePicker);
+        add(datePicker);
+      
     }
 
     /**
@@ -27,32 +67,252 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMessages = new javax.swing.JTable();
+        lblMessagesResults = new javax.swing.JLabel();
+        jPanelSearchFields = new javax.swing.JPanel();
+        textDateFrom = new javax.swing.JTextField();
+        lblDateTo = new javax.swing.JLabel();
+        textDateTo = new javax.swing.JTextField();
+        lblDateFrom = new javax.swing.JLabel();
+        btnSearchMessages = new javax.swing.JButton();
+        txtKeywords = new javax.swing.JTextField();
+        lblKeyWords = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        lblUserName = new javax.swing.JLabel();
+        lblSubtitle = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        imgLogoClass21 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnExportCSV = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMainMenu = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Severity Bullying Identifier Tool");
 
-        jLabel1.setText("Messages from Class21");
+        tblMessages.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 1, true));
+        tblMessages.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblMessages);
+
+        lblMessagesResults.setText("Messages Results");
+
+        jPanelSearchFields.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
+        jPanelSearchFields.setToolTipText("Search");
+
+        textDateFrom.setToolTipText("");
+
+        lblDateTo.setText("to");
+
+        lblDateFrom.setText("Date From:");
+
+        btnSearchMessages.setText("Search");
+        btnSearchMessages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchMessagesActionPerformed(evt);
+            }
+        });
+
+        lblKeyWords.setText("Keywords:");
+
+        lblUserName.setText("User Name:");
+
+        javax.swing.GroupLayout jPanelSearchFieldsLayout = new javax.swing.GroupLayout(jPanelSearchFields);
+        jPanelSearchFields.setLayout(jPanelSearchFieldsLayout);
+        jPanelSearchFieldsLayout.setHorizontalGroup(
+            jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSearchFieldsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDateFrom)
+                    .addComponent(lblKeyWords)
+                    .addComponent(lblUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSearchFieldsLayout.createSequentialGroup()
+                        .addGroup(jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelSearchFieldsLayout.createSequentialGroup()
+                                .addComponent(textDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblDateTo)
+                                .addGap(18, 18, 18)
+                                .addComponent(textDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtKeywords))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearchMessages)
+                        .addGap(64, 64, 64))
+                    .addGroup(jPanelSearchFieldsLayout.createSequentialGroup()
+                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanelSearchFieldsLayout.setVerticalGroup(
+            jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSearchFieldsLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDateTo)
+                    .addComponent(textDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDateFrom)
+                    .addComponent(btnSearchMessages))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSearchFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKeywords, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblKeyWords))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblSubtitle.setText("You can validate all messages written by students that use Class21's website");
+
+        lblTitle.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblTitle.setText("Messages from Class21");
+
+        imgLogoClass21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logoClass21_100x92.png"))); // NOI18N
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/csvIcon100x100.png"))); // NOI18N
+
+        btnExportCSV.setText("Export to *.CSV");
+        btnExportCSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportCSVActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitle)
+                            .addComponent(lblSubtitle))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imgLogoClass21, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(177, 177, 177))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanelSearchFields, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMessagesResults)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1064, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnExportCSV)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(71, 71, 71))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSubtitle))
+                    .addComponent(imgLogoClass21, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(jPanelSearchFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblMessagesResults)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExportCSV))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(105, 105, 105))
+        );
+
+        jTabbedPane1.addTab("Search All Messages", jPanel1);
+
+        jMainMenu.setText("Options");
+
+        jMenu4.setText("Load Messages from txt");
+        jMenu4.setToolTipText("");
+        jMainMenu.add(jMenu4);
+
+        jMenuBar1.add(jMainMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addContainerGap(262, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Search All Messages");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSearchMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMessagesActionPerformed
+        // TODO add your handling code here:
+        runQueryAllMessages();
+    }//GEN-LAST:event_btnSearchMessagesActionPerformed
+
+    private void btnExportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportCSVActionPerformed
+        // TODO add your handling code here:
+         List<TweetCSV> listTweetsCSV  = new ArrayList<>(); 
+         try {
+                    for(Tweet tweet: (List<Tweet>)this.listTweets){
+                         TweetCSV tweetCSV;
+                         tweetCSV= tweet.convertToTweetCSV();
+                         listTweetsCSV.add(tweetCSV);
+                    }
+                   
+                 
+                  writeCSVTweets(listTweetsCSV);  
+                  JOptionPane.showMessageDialog (null, "CSV created succesfully", "Export Status", JOptionPane.INFORMATION_MESSAGE);
+
+            }catch (Exception e) {
+                    e.printStackTrace();
+	     }
+
+         
+			
+    }//GEN-LAST:event_btnExportCSVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,8 +348,86 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+       /**
+     * @pamela: Queries to get information from Class21
+     */
+    private static String QUERY_BASED_ON_USER_NAME="from WpUsers where userLogin like '%";
+    private static String QUERY_BASED_ON_DISPLAY_NAME="from WpUsers where displayName like '%";
+    
+    
+    
+    private static String QUERY_ALL_MESSAGES =  " FROM  WpBpActivity Mensaje "
+            +                                   " WHERE Mensaje.component =  'activity'  "+
+                                                " ORDER BY Mensaje.id, Mensaje.secondaryItemId";
+
+    private void runQueryAllMessages() {
+        executeHQLQuery(QUERY_ALL_MESSAGES);   
+    }
+    
+    
+    /*@pamela*/
+    private void executeHQLQuery(String hql) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query q = session.createQuery(hql);
+            List resultList = q.list();
+            displayResult(resultList);
+            session.getTransaction().commit();
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+    }
+    
+    private void displayResult(List resultList) {
+        //@pamela --> Show all messages
+       this.listTweets = new ArrayList();
+       for(int i=0;i<resultList.size();i++){
+            WpBpActivity message = (WpBpActivity)resultList.get(i);
+            Tweet tweet = new Tweet(message.getContent());
+            tweet.setUserId(message.getUserId()+"");
+            tweet.setTextId(message.getId()+"");
+            tweet.setSecondaryTextId(message.getSecondaryItemId());
+            try {
+                tweet.process();
+            } catch (IOException ex) {
+               logger.error("pame--> error tweet: " + tweet.getText());
+
+            }
+            listTweets.add(tweet);
+       }
+       
+       this.tblMessages.setModel( new MessagesTableModel(listTweets));
+}
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExportCSV;
+    private javax.swing.JButton btnSearchMessages;
+    private javax.swing.JLabel imgLogoClass21;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMainMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelSearchFields;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblDateFrom;
+    private javax.swing.JLabel lblDateTo;
+    private javax.swing.JLabel lblKeyWords;
+    private javax.swing.JLabel lblMessagesResults;
+    private javax.swing.JLabel lblSubtitle;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JTable tblMessages;
+    private javax.swing.JTextField textDateFrom;
+    private javax.swing.JTextField textDateTo;
+    private javax.swing.JTextField txtKeywords;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
+    /**/
+    private JDatePickerImpl datePicker;
 }
