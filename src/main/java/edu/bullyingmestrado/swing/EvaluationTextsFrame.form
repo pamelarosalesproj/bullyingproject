@@ -55,7 +55,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <Component id="jTabSingleMessage" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -64,21 +64,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" min="-2" pref="577" max="-2" attributes="0"/>
+              <Component id="jTabSingleMessage" min="-2" pref="577" max="-2" attributes="0"/>
               <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="jTabSingleMessage">
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Search All Messages"/>
       </AccessibilityProperties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="jPanelAllMessages">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Search All Messages">
@@ -336,6 +336,629 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportCSVActionPerformed"/>
               </Events>
             </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelIDMessage">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Search Message by ID">
+                <Property name="tabTitle" type="java.lang.String" value="Search Message by ID"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="imgLogoClass23" min="-2" pref="92" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="433" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="imgLogoClass23" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="189" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="imgLogoClass23">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imgs/logoClass21_100x92.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="66" red="0" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="tab2lblMessageID" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="tab2TxtMessageID" min="-2" pref="188" max="-2" attributes="0"/>
+                          <EmptySpace pref="110" max="32767" attributes="0"/>
+                          <Component id="tab2BtnSearchMessageID" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tab2lblMessageID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2TxtMessageID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2BtnSearchMessageID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="tab2lblMessageID">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Message ID"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="tab2TxtMessageID">
+                </Component>
+                <Component class="javax.swing.JButton" name="tab2BtnSearchMessageID">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Search"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tab2BtnSearchMessageIDActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel2">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="66" red="0" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tab2lblBullyingTrace" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblSeverity" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tab2lblRPTASeverity" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tab2lblRPTABullyingTrace" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab2lblRPTATeasingTrace" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab2lblRPTAAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab2lblRPTABullyingType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tab2lblBullyingTypeVALUE" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab2lblAuthorVALUE" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab2TeasingVALUE" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab2BullyingTraceVALUE" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="244" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tab2lblBullyingTrace" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblRPTABullyingTrace" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2BullyingTraceVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblRPTATeasingTrace" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2TeasingVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblRPTAAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblAuthorVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblRPTABullyingType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblBullyingTypeVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tab2lblSeverity" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab2lblRPTASeverity" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="93" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Author"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Bullying Type"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Teasing Trace?"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblBullyingTrace">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Bullying Trace?"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblRPTABullyingTrace">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblRPTATeasingTrace">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblRPTAAuthor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblRPTABullyingType">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblSeverity">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Severity"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblRPTASeverity">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2BullyingTraceVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2TeasingVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblAuthorVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab2lblBullyingTypeVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelSingleMessage">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Evaluate Single Message">
+                <Property name="tabTitle" type="java.lang.String" value="Evaluate Single Message"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="469" max="-2" attributes="0"/>
+                                      <Component id="btnEvaluateSingleText" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="imgLogoClass22" min="-2" pref="92" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="imgLogoClass22" min="-2" pref="76" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEvaluateSingleText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="txtTextToBeEvaluated">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Enter a text to be evaluated: (max 150 characters)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnEvaluateSingleText">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Evaluate"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEvaluateSingleTextActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="imgLogoClass22">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imgs/logoClass21_100x92.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="66" red="0" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblSeverity" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tab3lblRPTASeverity" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tab3lblRPTABullyingTrace" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab3lblRPTATeasingTrace" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab3lblRPTAAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab3lblRPTABullyingType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tab3lblBullyingTypeVALUE" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab3lblAuthorVALUE" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab3TeasingVALUE" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tab3BullyingTraceVALUE" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="484" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblRPTABullyingTrace" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3BullyingTraceVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblRPTATeasingTrace" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3TeasingVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblRPTAAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblAuthorVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblRPTABullyingType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblBullyingTypeVALUE" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tab3lblSeverity" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab3lblRPTASeverity" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="93" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Author"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Bullying Type"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Teasing Trace?"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel10">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Bullying Trace?"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblRPTABullyingTrace">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblRPTATeasingTrace">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblRPTAAuthor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblRPTABullyingType">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblSeverity">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Severity"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblRPTASeverity">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3BullyingTraceVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3TeasingVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblAuthorVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tab3lblBullyingTypeVALUE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0.0"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pnl4LoadFile">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Load *.txt">
+                <Property name="tabTitle" type="java.lang.String" value="Load *.txt"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="474" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="400" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel4">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="66" red="0" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tab4BtnEvaluateFile" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="tab4lblTxtLoad" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="tab4TxtFileName" min="-2" pref="216" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tab4BtnOpenTXTFile" min="-2" pref="70" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="117" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tab4lblTxtLoad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab4TxtFileName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tab4BtnOpenTXTFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tab4BtnEvaluateFile" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="40" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="tab4lblTxtLoad">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Select *.text to be evaluated"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="tab4TxtFileName">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="tab4BtnOpenTXTFile">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Open *.txt"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tab4BtnOpenTXTFileActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="tab4BtnEvaluateFile">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Evaluate *.txt"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tab4BtnEvaluateFileActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

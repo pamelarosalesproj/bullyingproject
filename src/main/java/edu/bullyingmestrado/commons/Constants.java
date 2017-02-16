@@ -103,6 +103,8 @@ public final class Constants {
            public static final String MSG_INFO_FILECREATED = "INFO - The file created is : '";
            public static final String MSG_INFO_CSVCREATED= "INFO - CSV File written successfully";
            public static final String MSG_ERROR_CSVFAIL= "ERROR - CSV File wasn't created or has errors";
+           public static final String MSG_ERROR_NONUMBERFORMAT = "ERROR - Incorrect format for numbers";
+          
 
            /**
             List of keywords used in Bullying context
@@ -167,7 +169,11 @@ public final class Constants {
            public static final String COLUMN_TWEET_ISVALIDFUZZIFICATION ="isValidForFuzzification";
            public static final String COLUMN_TWEET_VALUESEVERITY ="valueSeverity";
            
-          
+           
+           /*Options swing tab*/
+           public static final String OPTION_TAB_SINGLEID = "singleID";
+           public static final String OPTION_TAB_SINGLETEXT = "singleText";
+         
            public static String getCSVFilename(){
                 Date dNow = new Date( );
                 SimpleDateFormat ft = 

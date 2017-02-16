@@ -13,12 +13,19 @@ import edu.bullyingmestrado.entities.TweetCSV;
 import edu.bullyingmestrado.fuzzification.ReadTweets;
 import static edu.bullyingmestrado.fuzzification.ReadTweets.writeCSVTweets;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -45,17 +52,21 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     List of Tweets
     */
     List listTweets;
+    
+    /*
+    FileChooser 
+    */
+    JFileChooser fc;
+    
     public EvaluationTextsFrame() {
         
-        
         initComponents();
-        //setLayout(new FlowLayout());
-        UtilDateModel model = new UtilDateModel();
-        JDatePanelImpl datePanel = new JDatePanelImpl(model);
-        datePicker = new JDatePickerImpl(datePanel);
-        //this.jPanel1.add(datePicker);
-        add(datePicker);
-      
+        
+        //@pamela --> Create a file chooser
+        fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        fc.setFileFilter(filter);
+        
     }
 
     /**
@@ -68,8 +79,8 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jTabSingleMessage = new javax.swing.JTabbedPane();
+        jPanelAllMessages = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMessages = new javax.swing.JTable();
         lblMessagesResults = new javax.swing.JLabel();
@@ -88,6 +99,54 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
         imgLogoClass21 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnExportCSV = new javax.swing.JButton();
+        jPanelIDMessage = new javax.swing.JPanel();
+        imgLogoClass23 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        tab2lblMessageID = new javax.swing.JLabel();
+        tab2TxtMessageID = new javax.swing.JTextField();
+        tab2BtnSearchMessageID = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tab2lblBullyingTrace = new javax.swing.JLabel();
+        tab2lblRPTABullyingTrace = new javax.swing.JLabel();
+        tab2lblRPTATeasingTrace = new javax.swing.JLabel();
+        tab2lblRPTAAuthor = new javax.swing.JLabel();
+        tab2lblRPTABullyingType = new javax.swing.JLabel();
+        tab2lblSeverity = new javax.swing.JLabel();
+        tab2lblRPTASeverity = new javax.swing.JLabel();
+        tab2BullyingTraceVALUE = new javax.swing.JLabel();
+        tab2TeasingVALUE = new javax.swing.JLabel();
+        tab2lblAuthorVALUE = new javax.swing.JLabel();
+        tab2lblBullyingTypeVALUE = new javax.swing.JLabel();
+        jPanelSingleMessage = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtTextToBeEvaluated = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        btnEvaluateSingleText = new javax.swing.JButton();
+        imgLogoClass22 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        tab3lblRPTABullyingTrace = new javax.swing.JLabel();
+        tab3lblRPTATeasingTrace = new javax.swing.JLabel();
+        tab3lblRPTAAuthor = new javax.swing.JLabel();
+        tab3lblRPTABullyingType = new javax.swing.JLabel();
+        tab3lblSeverity = new javax.swing.JLabel();
+        tab3lblRPTASeverity = new javax.swing.JLabel();
+        tab3BullyingTraceVALUE = new javax.swing.JLabel();
+        tab3TeasingVALUE = new javax.swing.JLabel();
+        tab3lblAuthorVALUE = new javax.swing.JLabel();
+        tab3lblBullyingTypeVALUE = new javax.swing.JLabel();
+        pnl4LoadFile = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        tab4lblTxtLoad = new javax.swing.JLabel();
+        tab4TxtFileName = new javax.swing.JTextField();
+        tab4BtnOpenTXTFile = new javax.swing.JButton();
+        tab4BtnEvaluateFile = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMainMenu = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -198,41 +257,41 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelAllMessagesLayout = new javax.swing.GroupLayout(jPanelAllMessages);
+        jPanelAllMessages.setLayout(jPanelAllMessagesLayout);
+        jPanelAllMessagesLayout.setHorizontalGroup(
+            jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
+                        .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitle)
                             .addComponent(lblSubtitle))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(imgLogoClass21, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(177, 177, 177))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAllMessagesLayout.createSequentialGroup()
                         .addComponent(jPanelSearchFields, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
+                        .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMessagesResults)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1064, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAllMessagesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnExportCSV)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(71, 71, 71))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        jPanelAllMessagesLayout.setVerticalGroup(
+            jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAllMessagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSubtitle))
@@ -243,17 +302,384 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                 .addComponent(lblMessagesResults)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExportCSV))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(105, 105, 105))
         );
 
-        jTabbedPane1.addTab("Search All Messages", jPanel1);
+        jTabSingleMessage.addTab("Search All Messages", jPanelAllMessages);
+
+        imgLogoClass23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logoClass21_100x92.png"))); // NOI18N
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
+
+        tab2lblMessageID.setText("Message ID");
+        tab2lblMessageID.setToolTipText("");
+
+        tab2BtnSearchMessageID.setText("Search");
+        tab2BtnSearchMessageID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tab2BtnSearchMessageIDActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(tab2lblMessageID)
+                .addGap(37, 37, 37)
+                .addComponent(tab2TxtMessageID, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(tab2BtnSearchMessageID)
+                .addGap(61, 61, 61))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tab2lblMessageID)
+                    .addComponent(tab2TxtMessageID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tab2BtnSearchMessageID))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
+
+        jLabel3.setText("Author");
+
+        jLabel4.setText("Bullying Type");
+
+        jLabel5.setText("Teasing Trace?");
+
+        tab2lblBullyingTrace.setText("Bullying Trace?");
+
+        tab2lblRPTABullyingTrace.setText("-");
+
+        tab2lblRPTATeasingTrace.setText("-");
+
+        tab2lblRPTAAuthor.setText("-");
+
+        tab2lblRPTABullyingType.setText("-");
+
+        tab2lblSeverity.setText("Severity");
+
+        tab2lblRPTASeverity.setText("-");
+
+        tab2BullyingTraceVALUE.setText("0.0");
+
+        tab2TeasingVALUE.setText("0.0");
+
+        tab2lblAuthorVALUE.setText("0.0");
+
+        tab2lblBullyingTypeVALUE.setText("0.0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tab2lblBullyingTrace)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(tab2lblSeverity))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tab2lblRPTASeverity)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tab2lblRPTABullyingTrace)
+                            .addComponent(tab2lblRPTATeasingTrace)
+                            .addComponent(tab2lblRPTAAuthor)
+                            .addComponent(tab2lblRPTABullyingType))
+                        .addGap(133, 133, 133)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tab2lblBullyingTypeVALUE)
+                            .addComponent(tab2lblAuthorVALUE)
+                            .addComponent(tab2TeasingVALUE)
+                            .addComponent(tab2BullyingTraceVALUE))))
+                .addContainerGap(244, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tab2lblBullyingTrace)
+                    .addComponent(tab2lblRPTABullyingTrace)
+                    .addComponent(tab2BullyingTraceVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tab2lblRPTATeasingTrace)
+                    .addComponent(tab2TeasingVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tab2lblRPTAAuthor)
+                    .addComponent(tab2lblAuthorVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tab2lblRPTABullyingType)
+                    .addComponent(tab2lblBullyingTypeVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tab2lblSeverity)
+                    .addComponent(tab2lblRPTASeverity))
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelIDMessageLayout = new javax.swing.GroupLayout(jPanelIDMessage);
+        jPanelIDMessage.setLayout(jPanelIDMessageLayout);
+        jPanelIDMessageLayout.setHorizontalGroup(
+            jPanelIDMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelIDMessageLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanelIDMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelIDMessageLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imgLogoClass23, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(433, Short.MAX_VALUE))
+        );
+        jPanelIDMessageLayout.setVerticalGroup(
+            jPanelIDMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelIDMessageLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanelIDMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgLogoClass23, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
+        );
+
+        jTabSingleMessage.addTab("Search Message by ID", jPanelIDMessage);
+
+        txtTextToBeEvaluated.setColumns(20);
+        txtTextToBeEvaluated.setRows(5);
+        jScrollPane2.setViewportView(txtTextToBeEvaluated);
+
+        jLabel2.setText("Enter a text to be evaluated: (max 150 characters)");
+
+        btnEvaluateSingleText.setText("Evaluate");
+        btnEvaluateSingleText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEvaluateSingleTextActionPerformed(evt);
+            }
+        });
+
+        imgLogoClass22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logoClass21_100x92.png"))); // NOI18N
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
+
+        jLabel7.setText("Author");
+
+        jLabel8.setText("Bullying Type");
+
+        jLabel9.setText("Teasing Trace?");
+
+        jLabel10.setText("Bullying Trace?");
+
+        tab3lblRPTABullyingTrace.setText("-");
+
+        tab3lblRPTATeasingTrace.setText("-");
+
+        tab3lblRPTAAuthor.setText("-");
+
+        tab3lblRPTABullyingType.setText("-");
+
+        tab3lblSeverity.setText("Severity");
+
+        tab3lblRPTASeverity.setText("-");
+
+        tab3BullyingTraceVALUE.setText("0.0");
+
+        tab3TeasingVALUE.setText("0.0");
+
+        tab3lblAuthorVALUE.setText("0.0");
+
+        tab3lblBullyingTypeVALUE.setText("0.0");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(tab3lblSeverity))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tab3lblRPTASeverity)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tab3lblRPTABullyingTrace)
+                            .addComponent(tab3lblRPTATeasingTrace)
+                            .addComponent(tab3lblRPTAAuthor)
+                            .addComponent(tab3lblRPTABullyingType))
+                        .addGap(133, 133, 133)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tab3lblBullyingTypeVALUE)
+                            .addComponent(tab3lblAuthorVALUE)
+                            .addComponent(tab3TeasingVALUE)
+                            .addComponent(tab3BullyingTraceVALUE))))
+                .addContainerGap(484, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(tab3lblRPTABullyingTrace)
+                    .addComponent(tab3BullyingTraceVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tab3lblRPTATeasingTrace)
+                    .addComponent(tab3TeasingVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tab3lblRPTAAuthor)
+                    .addComponent(tab3lblAuthorVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(tab3lblRPTABullyingType)
+                    .addComponent(tab3lblBullyingTypeVALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tab3lblSeverity)
+                    .addComponent(tab3lblRPTASeverity))
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelSingleMessageLayout = new javax.swing.GroupLayout(jPanelSingleMessage);
+        jPanelSingleMessage.setLayout(jPanelSingleMessageLayout);
+        jPanelSingleMessageLayout.setHorizontalGroup(
+            jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
+                        .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSingleMessageLayout.createSequentialGroup()
+                                .addGap(469, 469, 469)
+                                .addComponent(btnEvaluateSingleText))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
+                        .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addGap(18, 18, 18)
+                        .addComponent(imgLogoClass22, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(167, 167, 167))))
+        );
+        jPanelSingleMessageLayout.setVerticalGroup(
+            jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgLogoClass22, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEvaluateSingleText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
+        );
+
+        jTabSingleMessage.addTab("Evaluate Single Message", jPanelSingleMessage);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
+
+        tab4lblTxtLoad.setText("Select *.text to be evaluated");
+
+        tab4TxtFileName.setEditable(false);
+
+        tab4BtnOpenTXTFile.setText("Open *.txt");
+        tab4BtnOpenTXTFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tab4BtnOpenTXTFileActionPerformed(evt);
+            }
+        });
+
+        tab4BtnEvaluateFile.setText("Evaluate *.txt");
+        tab4BtnEvaluateFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tab4BtnEvaluateFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tab4BtnEvaluateFile)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(tab4lblTxtLoad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tab4TxtFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tab4BtnOpenTXTFile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tab4lblTxtLoad)
+                    .addComponent(tab4TxtFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tab4BtnOpenTXTFile))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tab4BtnEvaluateFile)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnl4LoadFileLayout = new javax.swing.GroupLayout(pnl4LoadFile);
+        pnl4LoadFile.setLayout(pnl4LoadFileLayout);
+        pnl4LoadFileLayout.setHorizontalGroup(
+            pnl4LoadFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl4LoadFileLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(474, Short.MAX_VALUE))
+        );
+        pnl4LoadFileLayout.setVerticalGroup(
+            pnl4LoadFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl4LoadFileLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(400, Short.MAX_VALUE))
+        );
+
+        jTabSingleMessage.addTab("Load *.txt", pnl4LoadFile);
 
         jMainMenu.setText("Options");
 
@@ -271,49 +697,129 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabSingleMessage)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabSingleMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("Search All Messages");
+        jTabSingleMessage.getAccessibleContext().setAccessibleName("Search All Messages");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnExportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportCSVActionPerformed
+        // TODO add your handling code here:
+        List<TweetCSV> listTweetsCSV  = new ArrayList<>();
+        try {
+            for(Tweet tweet: (List<Tweet>)this.listTweets){
+                TweetCSV tweetCSV;
+                tweetCSV= tweet.convertToTweetCSV();
+                listTweetsCSV.add(tweetCSV);
+            }
+
+            writeCSVTweets(listTweetsCSV);
+            JOptionPane.showMessageDialog (null, "CSV created succesfully", "Export Status", JOptionPane.INFORMATION_MESSAGE);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnExportCSVActionPerformed
 
     private void btnSearchMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMessagesActionPerformed
         // TODO add your handling code here:
         runQueryAllMessages();
     }//GEN-LAST:event_btnSearchMessagesActionPerformed
 
-    private void btnExportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportCSVActionPerformed
+    private void btnEvaluateSingleTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEvaluateSingleTextActionPerformed
         // TODO add your handling code here:
-         List<TweetCSV> listTweetsCSV  = new ArrayList<>(); 
-         try {
-                    for(Tweet tweet: (List<Tweet>)this.listTweets){
-                         TweetCSV tweetCSV;
-                         tweetCSV= tweet.convertToTweetCSV();
-                         listTweetsCSV.add(tweetCSV);
-                    }
-                   
-                 
-                  writeCSVTweets(listTweetsCSV);  
-                  JOptionPane.showMessageDialog (null, "CSV created succesfully", "Export Status", JOptionPane.INFORMATION_MESSAGE);
+         Tweet text = new Tweet(this.txtTextToBeEvaluated.getText());
+         text.setDisplayChartFuzzy(true);
+            try {
+                text.process();
+                displayResultIDMessage(text, "singleText");
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(EvaluationTextsFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_btnEvaluateSingleTextActionPerformed
 
-            }catch (Exception e) {
+    private void tab2BtnSearchMessageIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tab2BtnSearchMessageIDActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            int idMessage = Integer.parseInt(this.tab2TxtMessageID.getText().trim());
+            Tweet tweet = this.runQuerySingleIDMessage(idMessage);
+            tweet.setDisplayChartFuzzy(true);
+            tweet.process();
+            displayResultIDMessage(tweet, "singleID");
+         } catch (IOException ex) {
+              logger.error(Constants.MSG_ERROR_NOFILE);
+         } catch (NumberFormatException ex){
+              logger.error(Constants.MSG_ERROR_NONUMBERFORMAT);
+         }
+        
+    }//GEN-LAST:event_tab2BtnSearchMessageIDActionPerformed
+
+    private void tab4BtnOpenTXTFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tab4BtnOpenTXTFileActionPerformed
+        // TODO add your handling code here:
+        int returnVal=this.fc.showOpenDialog(this.pnl4LoadFile);
+        
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                //This is where a real application would open the file.
+                logger.info("pame--> File: "  + file.getAbsolutePath() + "." + Constants.NEW_LINE_SEPARATOR);
+                this.tab4TxtFileName.setText( file.getAbsolutePath());
+               // ;
+            } else {
+                logger.info("pame --> Open command cancelled by user. "  + Constants.NEW_LINE_SEPARATOR);
+            }
+             
+    }//GEN-LAST:event_tab4BtnOpenTXTFileActionPerformed
+
+    private void tab4BtnEvaluateFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tab4BtnEvaluateFileActionPerformed
+        // TODO add your handling code here:
+        try{
+            processTxtFileLoad(this.tab4TxtFileName.getText());
+            JOptionPane.showMessageDialog (null, "TXT evaluated successfuly. CSV created", "Text Evaluation", JOptionPane.INFORMATION_MESSAGE);
+         } catch (IOException e) {
+                    logger.error(Constants.MSG_ERROR_NOFILE);
+	 }catch (Exception e) {
                     e.printStackTrace();
-	     }
+	}
+        
+    }//GEN-LAST:event_tab4BtnEvaluateFileActionPerformed
 
-         
-			
-    }//GEN-LAST:event_btnExportCSVActionPerformed
+    private void processTxtFileLoad(String pathFile) throws Exception{
+        String line;
+            List<TweetCSV> listTweetsTXT  = new ArrayList<>(); 
+           
+                    InputStream fis = new FileInputStream(pathFile);
+                    InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+                    BufferedReader br = new BufferedReader(isr);
+                    
+                    
+                    Tweet tweet;
+                    TweetCSV tweetCSV;
+                    while ((line = br.readLine()) != null) {		
+                        tweet = new Tweet(line);
+                        tweet.process();
+                        tweetCSV= tweet.convertToTweetCSV();
+                        /*@pamela --> Add tweet to the list of tweets*/
+                        listTweetsTXT.add(tweetCSV);
+                        
+                    }
+                    
+                  writeCSVTweets(listTweetsTXT);  
+		
 
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -360,11 +866,15 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     private static String QUERY_ALL_MESSAGES =  " FROM  WpBpActivity Mensaje "
             +                                   " WHERE Mensaje.component =  'activity'  "+
                                                 " ORDER BY Mensaje.id, Mensaje.secondaryItemId";
+    
+    private static String QUERY_SINGLE_MESSAGE =  " FROM  WpBpActivity Mensaje "
+            +                                   " WHERE Mensaje.component =  'activity'  "+
+                                                " AND Mensaje.id =";
 
+    /*-------------All Messages --------------*/ 
     private void runQueryAllMessages() {
         executeHQLQuery(QUERY_ALL_MESSAGES);   
     }
-    
     
     /*@pamela*/
     private void executeHQLQuery(String hql) {
@@ -380,7 +890,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
         }
     }
     
-    private void displayResult(List resultList) {
+     private void displayResult(List resultList) {
         //@pamela --> Show all messages
        this.listTweets = new ArrayList();
        for(int i=0;i<resultList.size();i++){
@@ -399,22 +909,109 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
        }
        
        this.tblMessages.setModel( new MessagesTableModel(listTweets));
-}
+    }
+    
+     
+    /*-------------ID Message --------------*/ 
+     
+    private Tweet runQuerySingleIDMessage(int idMessage){
+        String hql = QUERY_SINGLE_MESSAGE + idMessage;
+         Tweet tweet = null;
+        
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query q = session.createQuery(hql);
+            List resultList = q.list();
+            session.getTransaction().commit();
+            
+            for(int i=0;i<resultList.size();i++){
+                 WpBpActivity message = (WpBpActivity)resultList.get(i);
+                 tweet = new Tweet(message.getContent());
+                 tweet.setUserId(message.getUserId()+"");
+                 tweet.setTextId(message.getId()+"");
+                 tweet.setSecondaryTextId(message.getSecondaryItemId());
+                 try {
+                     tweet.process();
+                 } catch (IOException ex) {
+                    logger.error("pame--> error tweet: " + tweet.getText());
+
+                 }
+            }
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        
+        return tweet;
+    }
+    
+    
+     private void displayResultIDMessage(Tweet tweet, String tab) {
+        //@pamela --> 
+        /*Tab2*/
+        if (tab.equals(Constants.OPTION_TAB_SINGLEID)){
+        //ID Message from BD
+           this.tab2lblRPTABullyingTrace.setText(tweet.getBullyingTraceClassResult());
+           this.tab2lblRPTATeasingTrace.setText(tweet.getTeasingTraceClassResult());
+           this.tab2lblRPTAAuthor.setText(tweet.getAuthorRoleClassResult());
+           this.tab2lblRPTABullyingType.setText(tweet.getFormBullyingClassResult());
+           this.tab2lblRPTASeverity.setText(tweet.getValueSeverity()+"");
+           
+           this.tab2BullyingTraceVALUE.setText(tweet.getBullyingTraceValueResult()+"");
+           this.tab2TeasingVALUE.setText(tweet.getTeasingTraceValueResult()+"");
+           this.tab2lblAuthorVALUE.setText(tweet.getAuthorRoleValueResult()+"");
+           this.tab2lblBullyingTypeVALUE.setText(tweet.getFormBullyingValueResult()+"");
+        }
+        else{
+        // Text input by user
+           this.tab3lblRPTABullyingTrace.setText(tweet.getBullyingTraceClassResult());
+           this.tab3lblRPTATeasingTrace.setText(tweet.getTeasingTraceClassResult());
+           this.tab3lblRPTAAuthor.setText(tweet.getAuthorRoleClassResult());
+           this.tab3lblRPTABullyingType.setText(tweet.getFormBullyingClassResult());
+           this.tab3lblRPTASeverity.setText(tweet.getValueSeverity()+"");
+           
+           this.tab3BullyingTraceVALUE.setText(tweet.getBullyingTraceValueResult()+"");
+           this.tab3TeasingVALUE.setText(tweet.getTeasingTraceValueResult()+"");
+           this.tab3lblAuthorVALUE.setText(tweet.getAuthorRoleValueResult()+"");
+           this.tab3lblBullyingTypeVALUE.setText(tweet.getFormBullyingValueResult()+"");
+        }
+        
+        /*Tab3*/
+    }
+   
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEvaluateSingleText;
     private javax.swing.JButton btnExportCSV;
     private javax.swing.JButton btnSearchMessages;
     private javax.swing.JLabel imgLogoClass21;
+    private javax.swing.JLabel imgLogoClass22;
+    private javax.swing.JLabel imgLogoClass23;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMainMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelAllMessages;
+    private javax.swing.JPanel jPanelIDMessage;
     private javax.swing.JPanel jPanelSearchFields;
+    private javax.swing.JPanel jPanelSingleMessage;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabSingleMessage;
     private javax.swing.JLabel lblDateFrom;
     private javax.swing.JLabel lblDateTo;
     private javax.swing.JLabel lblKeyWords;
@@ -422,10 +1019,40 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
+    private javax.swing.JPanel pnl4LoadFile;
+    private javax.swing.JButton tab2BtnSearchMessageID;
+    private javax.swing.JLabel tab2BullyingTraceVALUE;
+    private javax.swing.JLabel tab2TeasingVALUE;
+    private javax.swing.JTextField tab2TxtMessageID;
+    private javax.swing.JLabel tab2lblAuthorVALUE;
+    private javax.swing.JLabel tab2lblBullyingTrace;
+    private javax.swing.JLabel tab2lblBullyingTypeVALUE;
+    private javax.swing.JLabel tab2lblMessageID;
+    private javax.swing.JLabel tab2lblRPTAAuthor;
+    private javax.swing.JLabel tab2lblRPTABullyingTrace;
+    private javax.swing.JLabel tab2lblRPTABullyingType;
+    private javax.swing.JLabel tab2lblRPTASeverity;
+    private javax.swing.JLabel tab2lblRPTATeasingTrace;
+    private javax.swing.JLabel tab2lblSeverity;
+    private javax.swing.JLabel tab3BullyingTraceVALUE;
+    private javax.swing.JLabel tab3TeasingVALUE;
+    private javax.swing.JLabel tab3lblAuthorVALUE;
+    private javax.swing.JLabel tab3lblBullyingTypeVALUE;
+    private javax.swing.JLabel tab3lblRPTAAuthor;
+    private javax.swing.JLabel tab3lblRPTABullyingTrace;
+    private javax.swing.JLabel tab3lblRPTABullyingType;
+    private javax.swing.JLabel tab3lblRPTASeverity;
+    private javax.swing.JLabel tab3lblRPTATeasingTrace;
+    private javax.swing.JLabel tab3lblSeverity;
+    private javax.swing.JButton tab4BtnEvaluateFile;
+    private javax.swing.JButton tab4BtnOpenTXTFile;
+    private javax.swing.JTextField tab4TxtFileName;
+    private javax.swing.JLabel tab4lblTxtLoad;
     private javax.swing.JTable tblMessages;
     private javax.swing.JTextField textDateFrom;
     private javax.swing.JTextField textDateTo;
     private javax.swing.JTextField txtKeywords;
+    private javax.swing.JTextArea txtTextToBeEvaluated;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
     /**/
