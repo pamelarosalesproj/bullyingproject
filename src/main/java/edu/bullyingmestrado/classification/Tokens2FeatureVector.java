@@ -12,15 +12,18 @@ June 2012
  * Modified by Pamela Rosales
  */
 
+import edu.bullyingmestrado.fuzzification.ReadTweets;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.ArrayList;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class Tokens2FeatureVector {
-	
+        private static final Logger logger = LogManager.getLogger(Tokens2FeatureVector.class.getName());
+
 	HashMap<String, Integer> vocab; 
 	
 	FeatureVector fv;
@@ -71,8 +74,16 @@ public class Tokens2FeatureVector {
 			if (idx != null)
 				fv.increase(idx);
 		}
-		this.fv.normalize();
-	   System.out.println(fv.toString());	
+		//System.out.println("vector BEFORE normalization");
+                //System.out.println(fv.toString());
+               
+                //logger.info(fv.toString());
+                
+                this.fv.normalize();
+                
+                //System.out.println("vector AFTER normalization");
+                //System.out.println(fv.toString());
+                //logger.info(fv.toString());
 	}
 	
 	public Integer[] getIndexSet(){

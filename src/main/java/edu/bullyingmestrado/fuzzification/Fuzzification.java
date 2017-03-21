@@ -27,7 +27,7 @@ public class Fuzzification {
         
     	String fileName = Constants.PATH_LONG_FCL +varname1+ Constants.UNDERLINE + varname2+ Constants.EXT_FCL;
 
-        logger.info(Constants.MSG_INFO_FILECREATED + fileName + Constants.SINGLE_QUOTE);
+        //logger.info(Constants.MSG_INFO_FILECREATED + fileName + Constants.SINGLE_QUOTE);
         FIS fis = FIS.load(fileName,true);
 
         // Load the FCL file according to the inputs

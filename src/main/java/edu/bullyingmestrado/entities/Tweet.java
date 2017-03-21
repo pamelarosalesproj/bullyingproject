@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /**
  *
@@ -24,7 +27,7 @@ import java.util.Map.Entry;
  */
 public class Tweet {
 
-
+     private static final Logger logger = LogManager.getLogger(Tweet.class.getName());
     /*@pamela --> Aditional information about user*/
    
     private String userId;
@@ -178,6 +181,7 @@ public class Tweet {
                     t2v.loadVocab(Constants.PATH_VOCAB);
                     this.tokens = tokenizer.tokenize(this.text);
                     this.tokensOneText = String.join(Constants.SPACE, this.tokens);
+                    
                     t2v.covertFeatureVector(tokens);
                     this.setFv(t2v.getFv());
 
@@ -207,6 +211,8 @@ public class Tweet {
                         if (this.validateTweetForFuzzification()){
                                 this.fuzzificationProcess();
                         }
+                        //Imprime tokens en texto + etiqueta de autor
+                        //logger.info("'" + tokensOneText + "'," + this.getAuthorRoleClassResult());
 
 
                     }
@@ -391,4 +397,12 @@ public class Tweet {
         this.secondaryTextId = secondaryTextId;
     }
    
+     public String getTokensOneText() {
+        return tokensOneText;
+    }
+
+    public void setTokensOneText(String tokensOneText) {
+        this.tokensOneText = tokensOneText;
+    }
+
 }

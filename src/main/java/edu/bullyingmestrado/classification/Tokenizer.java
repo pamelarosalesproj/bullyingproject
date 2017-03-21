@@ -35,6 +35,18 @@ public class Tokenizer {
 
 			text = text.replaceAll("\\@\\w+", "@USER");
 		}
+                
+                /*@pamela --> new rules for future time*/
+                text = text.replaceAll("he\\'ll+", "he will");
+                text = text.replaceAll("she\\'ll+", "she will");
+                text = text.replaceAll("they\\'ll+", "they will");
+                text = text.replaceAll("i\\'ll+", "i will");
+                text = text.replaceAll("we\\'ll+", "we will");
+                text = text.replaceAll("you\\'ll+", "you will");
+
+                //Some urban dictionary and abbreviations
+                text = text.replaceAll("y\\'all+", "you all");
+                text = text.replaceAll("24\\/7+", "you all");
 		// deal with negation
 		text = text.replaceAll("\\'", "");
                 text = text.replaceAll("\\!\\!+", "!!");
@@ -44,6 +56,8 @@ public class Tokenizer {
                 text = text.replaceAll("\\bdoesnt\\s+", "doesnt_");
                 text = text.replaceAll("\\bdont\\s+", "dont_");
                 text = text.replaceAll("\\baint\\s+", "aint_");
+                
+                
         
                 // tokenizer
                 Pattern p = null;

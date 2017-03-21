@@ -141,6 +141,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
         tab3TeasingVALUE = new javax.swing.JLabel();
         tab3lblAuthorVALUE = new javax.swing.JLabel();
         tab3lblBullyingTypeVALUE = new javax.swing.JLabel();
+        tab3ChbGenerateTweetsGraphs = new javax.swing.JCheckBox();
         pnl4LoadFile = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         tab4lblTxtLoad = new javax.swing.JLabel();
@@ -154,7 +155,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Severity Bullying Identifier Tool");
+        setTitle("Severity Bullying Identifier Framework");
 
         tblMessages.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 1, true));
         tblMessages.setModel(new javax.swing.table.DefaultTableModel(
@@ -573,6 +574,8 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                 .addContainerGap(93, Short.MAX_VALUE))
         );
 
+        tab3ChbGenerateTweetsGraphs.setText("Generate Charts");
+
         javax.swing.GroupLayout jPanelSingleMessageLayout = new javax.swing.GroupLayout(jPanelSingleMessage);
         jPanelSingleMessage.setLayout(jPanelSingleMessageLayout);
         jPanelSingleMessageLayout.setHorizontalGroup(
@@ -581,16 +584,16 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
-                        .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSingleMessageLayout.createSequentialGroup()
-                                .addGap(469, 469, 469)
-                                .addComponent(btnEvaluateSingleText))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addContainerGap(811, Short.MAX_VALUE))
                     .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
-                        .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
+                        .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
+                                .addComponent(tab3ChbGenerateTweetsGraphs)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEvaluateSingleText))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addComponent(imgLogoClass22, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(167, 167, 167))))
@@ -602,13 +605,16 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgLogoClass22, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEvaluateSingleText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(imgLogoClass22, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelSingleMessageLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelSingleMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tab3ChbGenerateTweetsGraphs)
+                            .addComponent(btnEvaluateSingleText))))
+                .addGap(17, 17, 17)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jTabSingleMessage.addTab("Evaluate Single Message", jPanelSingleMessage);
@@ -740,7 +746,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     private void btnEvaluateSingleTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEvaluateSingleTextActionPerformed
         // TODO add your handling code here:
          Tweet text = new Tweet(this.txtTextToBeEvaluated.getText());
-         text.setDisplayChartFuzzy(true);
+         text.setDisplayChartFuzzy(this.tab3ChbGenerateTweetsGraphs.isSelected());
             try {
                 text.process();
                 displayResultIDMessage(text, "singleText");
@@ -1035,6 +1041,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel tab2lblRPTATeasingTrace;
     private javax.swing.JLabel tab2lblSeverity;
     private javax.swing.JLabel tab3BullyingTraceVALUE;
+    private javax.swing.JCheckBox tab3ChbGenerateTweetsGraphs;
     private javax.swing.JLabel tab3TeasingVALUE;
     private javax.swing.JLabel tab3lblAuthorVALUE;
     private javax.swing.JLabel tab3lblBullyingTypeVALUE;

@@ -49,7 +49,7 @@ public class ReadTweets {
                         mappingStrategy.setColumnMapping(Constants.CSV_TWEETS_FILE_HEADER);
                         //Writing listTweets to csv file
                         bc.write(mappingStrategy,csvWriter,listTweets);
-                        logger.info(Constants.MSG_INFO_CSVCREATED);
+                        //logger.info(Constants.MSG_INFO_CSVCREATED);
                 }
                 catch(Exception e){
                 
@@ -81,6 +81,12 @@ public class ReadTweets {
                     while ((line = br.readLine()) != null) {		
                         tweet = new Tweet(line);
                         tweet.process();
+                        System.out.println(tweet.getTokensOneText());
+                        if (!tweet.getAuthorRoleClassResult().equals("")){
+                            System.out.println(tweet.getTokensOneText());
+                            System.out.println(tweet.getAuthorRoleClassResult() + " , " + tweet.getFv().toString()  ); 
+                            logger.info(tweet.getAuthorRoleClassResult() + " , " + tweet.getFv().toString()  ); 
+                        }
                         tweetCSV= tweet.convertToTweetCSV();
                         /*@pamela --> Add tweet to the list of tweets*/
                         listTweets.add(tweetCSV);
