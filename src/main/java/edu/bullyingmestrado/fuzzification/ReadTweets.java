@@ -81,11 +81,12 @@ public class ReadTweets {
                     while ((line = br.readLine()) != null) {		
                         tweet = new Tweet(line);
                         tweet.process();
-                        System.out.println(tweet.getTokensOneText());
                         if (!tweet.getAuthorRoleClassResult().equals("")){
                             System.out.println(tweet.getTokensOneText());
+                            //@pamela --> Print tweet after passing Tokenizer.java
+                            logger.info(tweet.getTokensOneText());
                             System.out.println(tweet.getAuthorRoleClassResult() + " , " + tweet.getFv().toString()  ); 
-                            logger.info(tweet.getAuthorRoleClassResult() + " , " + tweet.getFv().toString()  ); 
+                           // logger.info(tweet.getAuthorRoleClassResult() + " , " + tweet.getFv().toString()  ); 
                         }
                         tweetCSV= tweet.convertToTweetCSV();
                         /*@pamela --> Add tweet to the list of tweets*/
