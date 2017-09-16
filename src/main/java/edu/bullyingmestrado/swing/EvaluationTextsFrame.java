@@ -12,6 +12,8 @@ import edu.bullyingmestrado.entities.Tweet;
 import edu.bullyingmestrado.entities.TweetCSV;
 import edu.bullyingmestrado.fuzzification.ReadTweets;
 import static edu.bullyingmestrado.fuzzification.ReadTweets.writeCSVTweets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,6 +39,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -58,6 +62,8 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     */
     JFileChooser fc;
     
+     public Timer timer = null;
+    
     public EvaluationTextsFrame() {
         
         initComponents();
@@ -67,6 +73,16 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         fc.setFileFilter(filter);
         
+        
+        timer =new Timer(1000, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                lblTimer.setText(sdf.format(new java.util.Date()));
+            }
+        
+        });
+        timer.start();
     }
 
     /**
@@ -99,6 +115,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
         imgLogoClass21 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnExportCSV = new javax.swing.JButton();
+        lblTimer = new javax.swing.JLabel();
         jPanelIDMessage = new javax.swing.JPanel();
         imgLogoClass23 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -258,6 +275,8 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
             }
         });
 
+        lblTimer.setText("TIMER");
+
         javax.swing.GroupLayout jPanelAllMessagesLayout = new javax.swing.GroupLayout(jPanelAllMessages);
         jPanelAllMessages.setLayout(jPanelAllMessagesLayout);
         jPanelAllMessagesLayout.setHorizontalGroup(
@@ -267,9 +286,14 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                 .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
                         .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle)
-                            .addComponent(lblSubtitle))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
+                                .addComponent(lblSubtitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
+                                .addComponent(lblTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTimer)
+                                .addGap(242, 242, 242)))
                         .addComponent(imgLogoClass21, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(177, 177, 177))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAllMessagesLayout.createSequentialGroup()
@@ -279,7 +303,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                         .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMessagesResults)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1064, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(16, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAllMessagesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnExportCSV)
@@ -293,7 +317,9 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAllMessagesLayout.createSequentialGroup()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelAllMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTimer))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSubtitle))
                     .addComponent(imgLogoClass21, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1023,6 +1049,7 @@ public class EvaluationTextsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblKeyWords;
     private javax.swing.JLabel lblMessagesResults;
     private javax.swing.JLabel lblSubtitle;
+    private javax.swing.JLabel lblTimer;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JPanel pnl4LoadFile;

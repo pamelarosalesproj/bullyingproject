@@ -235,6 +235,7 @@ public class Classification implements Comparable<Classification>{
 			rptaClassificador = margin > 0 ? class_labels[0] : class_labels[1];
                         this.value = margin;
                         this.classResult = rptaClassificador  + Constants.UNDERLINE + this.classifierName;
+                        System.out.println(" margin : " + margin);
                         return;
 		}
 		

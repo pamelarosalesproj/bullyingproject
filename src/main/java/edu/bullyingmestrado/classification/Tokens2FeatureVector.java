@@ -74,15 +74,15 @@ public class Tokens2FeatureVector {
 			if (idx != null)
 				fv.increase(idx);
 		}
-		//System.out.println("vector BEFORE normalization");
-                //System.out.println(fv.toString());
+		System.out.println("vector BEFORE normalization");
+                System.out.println(fv.toString());
                
                 //logger.info(fv.toString());
                 
                 this.fv.normalize();
                 
-                //System.out.println("vector AFTER normalization");
-                //System.out.println(fv.toString());
+                System.out.println("vector AFTER normalization");
+                System.out.println(fv.toString());
                 //logger.info(fv.toString());
 	}
 	
